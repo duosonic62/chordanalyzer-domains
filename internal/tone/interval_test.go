@@ -4,8 +4,8 @@ import "testing"
 
 func TestString_PositiveWholeTone(t *testing.T) {
 	actual, _ := NewInterval(10)
-	if actual.String() != "#6" {
-		t.Error("Expected: 5, but actual: " + actual.String())
+	if actual.String() != "#6" || actual.String() != "m7" {
+		t.Error("Expected: #6 or m7, but actual: " + actual.String())
 	}
 }
 
