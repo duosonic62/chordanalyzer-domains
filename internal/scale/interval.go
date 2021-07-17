@@ -1,5 +1,7 @@
 package scale
 
+import "errors"
+
 type Interval struct {
 	value int
 	name  string
@@ -152,4 +154,36 @@ func (i Interval) IsEquivalent(target *Interval) bool {
 //同音でないと等値にならない
 func (i Interval) IsEquals(target *Interval) bool {
 	return i.value == target.value && i.upper == target.upper
+}
+
+//intervalFromNumber は数字からインターバルを復元する
+func intervalFromNumber(num int) (*Interval, error) {
+	switch num {
+	case 0:
+		return &Intervals.R, nil
+	case 1:
+		return &Intervals.Minor2, nil
+	case 2:
+		return &Intervals.Major2, nil
+	case 3:
+		return &Intervals.Minor3, nil
+	case 4:
+		return &Intervals.Major3, nil
+	case 5:
+		return &Intervals.Perfect4, nil
+	case 6:
+		return &Intervals.Sharp4, nil
+	case 7:
+		return &Intervals.Perfect5, nil
+	case 8:
+		return &Intervals.Sharp5, nil
+	case 9:
+		return &Intervals.Major6, nil
+	case 10:
+		return &Intervals.Minor7, nil
+	case 11:
+		return &Intervals.Major7, nil
+	default:
+		return nil, errors.New("scale tone interval must be 0 - 11")
+	}
 }
