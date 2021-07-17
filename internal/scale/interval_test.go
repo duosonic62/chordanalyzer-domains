@@ -31,3 +31,75 @@ func TestInterval_IsEquals(t *testing.T) {
 		t.Error("Expected: 9 and 9 is Equals")
 	}
 }
+
+func TestInterval_intervalFromNumber(t *testing.T) {
+	actual, _ := intervalFromNumber(0)
+	if Intervals.R.IsEquivalent(actual) {
+		t.Error("Expected: R, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(1)
+	if Intervals.Minor2.IsEquivalent(actual) {
+		t.Error("Expected: Minor2, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(2)
+	if Intervals.Major2.IsEquivalent(actual) {
+		t.Error("Expected: Major2, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(3)
+	if Intervals.Minor3.IsEquivalent(actual) {
+		t.Error("Expected: Minor3, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(4)
+	if Intervals.Major3.IsEquivalent(actual) {
+		t.Error("Expected: Major3, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(5)
+	if Intervals.Perfect4.IsEquivalent(actual) {
+		t.Error("Expected: Perfect4, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(6)
+	if Intervals.Sharp4.IsEquivalent(actual) {
+		t.Error("Expected: Sharp4, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(7)
+	if Intervals.Perfect5.IsEquivalent(actual) {
+		t.Error("Expected: Perfect5, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(8)
+	if Intervals.Minor6.IsEquivalent(actual) {
+		t.Error("Expected: Minor6, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(9)
+	if Intervals.Major6.IsEquivalent(actual) {
+		t.Error("Expected: Major6, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(10)
+	if Intervals.Minor7.IsEquivalent(actual) {
+		t.Error("Expected: Minor7, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(11)
+	if Intervals.Major7.IsEquivalent(actual) {
+		t.Error("Expected: Major7, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(2)
+	if Intervals.Major2.IsEquivalent(actual) {
+		t.Error("Expected: Major2, but actual: " + actual.name)
+	}
+
+	actual, _ = intervalFromNumber(2)
+	if Intervals.Major2.IsEquivalent(actual) {
+		t.Error("Expected: Major2, but actual: " + actual.name)
+	}
+}

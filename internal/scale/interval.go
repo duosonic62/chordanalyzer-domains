@@ -176,7 +176,7 @@ func intervalFromNumber(num int) (*Interval, error) {
 	case 7:
 		return &Intervals.Perfect5, nil
 	case 8:
-		return &Intervals.Sharp5, nil
+		return &Intervals.Minor6, nil
 	case 9:
 		return &Intervals.Major6, nil
 	case 10:
