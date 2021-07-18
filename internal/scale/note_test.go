@@ -24,3 +24,15 @@ func TestNote_CalculateInterval(t *testing.T) {
 	}
 }
 
+func TestNote_GetIntervalNote(t *testing.T) {
+	actual, _ := Notes.C.GetIntervalNote(&Intervals.Perfect5)
+	if actual != &Notes.G {
+		t.Error("Expected: G, but actual: " + actual.name)
+	}
+
+	actual, _ = Notes.G.GetIntervalNote(&Intervals.Perfect4)
+	if actual != &Notes.C {
+		t.Error("Expected: C, but actual: " + actual.name)
+	}
+}
+
