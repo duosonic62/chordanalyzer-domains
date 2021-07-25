@@ -5,20 +5,7 @@ import "errors"
 type Code interface {
 	Name() string
 	Root() *Note
-	Notes() *[]Note
-}
-
-type Triad struct {
-	name  string
-	root  *Note
-	notes *[]Note
-}
-
-type TensionCode struct {
-	name  string
-	root  *Note
-	triadNotes *[]Note
-	tensionNotes *[]Note
+	Notes() []Note
 }
 
 func NewCode(notes []Note) (*TensionCode, error) {
