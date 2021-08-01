@@ -37,7 +37,11 @@ func NewTensionCode(notes []Note) (*Tension, error) {
 
 	var tensionName string
 	for _, note := range tensionNotes {
-		tensionName = tensionName + note.name
+		interval, err := triad.root.CalculateInterval(note)
+		if err != nil {
+			return nil, errors.Wrap(err, "contains invalid intervals")
+		}
+		tensionName = tensionName + interval.name
 	}
 	return &Tension{
 		name:         triad.name + tensionName,

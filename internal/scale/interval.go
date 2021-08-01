@@ -99,7 +99,7 @@ var Intervals = struct {
 	},
 	Minor7: Interval{
 		value: 10,
-		name:  "m7",
+		name:  "7",
 		upper: false,
 	},
 	Major7: Interval{
@@ -119,7 +119,7 @@ var Intervals = struct {
 	},
 	Sharp9: Interval{
 		value: 2,
-		name:  "9",
+		name:  "#9",
 		upper: true,
 	},
 	Natural11: Interval{
