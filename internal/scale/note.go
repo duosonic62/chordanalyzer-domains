@@ -123,6 +123,16 @@ func (n Note) GetIntervalNote(interval *Interval) (*Note, error) {
 	return note, nil
 }
 
+//Equals is compare notes
+func (n Note) Equals(other *Note) bool {
+	if other == nil {
+		return false
+	}
+
+	// 名前と音階が一緒なら同値
+	return n.name == other.name && n.intervalFromC == other.intervalFromC
+}
+
 func noteFromInterval(interval int) (*Note, error) {
 	switch interval {
 	case 0:

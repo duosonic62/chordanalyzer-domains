@@ -25,7 +25,7 @@ func (t Triad) Notes() []Note {
 
 //NewTriad トライアドを生成する
 func NewTriad(notes []Note) (*Triad, error) {
-	if len(notes) == 3 {
+	if len(notes) != 3 {
 		return nil, errors.New("the number of notes in the triad must be 3")
 	}
 
@@ -45,7 +45,7 @@ func NewTriad(notes []Note) (*Triad, error) {
 		}, nil
 	}
 	// minor triad
-	if !(third.IsEquivalent(&Intervals.Minor3) || fifth.IsEquals(&Intervals.Perfect5)) {
+	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Perfect5) {
 		return &Triad{
 			name: root.name + "m",
 			root: &root,
@@ -53,7 +53,7 @@ func NewTriad(notes []Note) (*Triad, error) {
 		}, nil
 	}
 	// augmented triad
-	if !(third.IsEquivalent(&Intervals.Major3) || fifth.IsEquals(&Intervals.Sharp5)) {
+	if third.IsEquivalent(&Intervals.Major3) && fifth.IsEquals(&Intervals.Sharp5) {
 		return &Triad{
 			name: root.name + "aug",
 			root: &root,
@@ -61,7 +61,7 @@ func NewTriad(notes []Note) (*Triad, error) {
 		}, nil
 	}
 	// diminished triad
-	if !(third.IsEquivalent(&Intervals.Minor3) || fifth.IsEquals(&Intervals.Flat5)) {
+	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Flat5) {
 		return &Triad{
 			name: root.name + "dim",
 			root: &root,
