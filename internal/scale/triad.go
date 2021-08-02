@@ -29,7 +29,6 @@ func NewTriad(notes []Note) (*Triad, error) {
 		return nil, errors.New("the number of notes in the triad must be 3")
 	}
 
-	// major 3 or minor 3?
 	root := notes[0]
 	third, err := root.CalculateInterval(notes[1])
 	fifth, err := root.CalculateInterval(notes[2])

@@ -13,63 +13,88 @@ var scaleNoteCount = 12
 var Notes = struct {
 	C  Note
 	CS Note
+	Db Note
 	D  Note
 	DS Note
+	Eb Note
 	E  Note
 	F  Note
 	FS Note
+	Gb Note
 	G  Note
 	GS Note
+	Ab Note
 	A  Note
 	AS Note
+	Bb Note
 	B  Note
 }{
 	C: Note{
-		name:    "C",
+		name:          "C",
 		intervalFromC: 0,
 	},
 	CS: Note{
-		name:    "C#",
+		name:          "C#",
+		intervalFromC: 1,
+	},
+	Db: Note{
+		name:          "Db",
 		intervalFromC: 1,
 	},
 	D: Note{
-		name:    "D",
+		name:          "D",
 		intervalFromC: 2,
 	},
 	DS: Note{
-		name:    "D#",
+		name:          "D#",
+		intervalFromC: 3,
+	},
+	Eb: Note{
+		name:          "Eb",
 		intervalFromC: 3,
 	},
 	E: Note{
-		name:    "E",
+		name:          "E",
 		intervalFromC: 4,
 	},
 	F: Note{
-		name:    "F",
+		name:          "F",
 		intervalFromC: 5,
 	},
 	FS: Note{
-		name:    "F#",
+		name:          "F#",
+		intervalFromC: 6,
+	},
+	Gb: Note{
+		name:          "Gb",
 		intervalFromC: 6,
 	},
 	G: Note{
-		name:    "G",
+		name:          "G",
 		intervalFromC: 7,
 	},
 	GS: Note{
-		name:    "G#",
+		name:          "G#",
+		intervalFromC: 8,
+	},
+	Ab: Note{
+		name:          "Ab",
 		intervalFromC: 8,
 	},
 	A: Note{
-		name:    "A",
+		name:          "A",
 		intervalFromC: 9,
 	},
 	AS: Note{
-		name:    "A#",
+		name:          "A#",
+		intervalFromC: 10,
+	},
+	Bb: Note{
+		name:          "Bb",
 		intervalFromC: 10,
 	},
 	B: Note{
-		name:    "B",
+		name:          "B",
 		intervalFromC: 11,
 	},
 }
