@@ -3,9 +3,9 @@ package scale
 import "errors"
 
 type Interval struct {
-	value int
-	name  string
-	upper bool
+	value   int
+	name    string
+	upper   bool
 }
 
 var Intervals = struct {
@@ -89,7 +89,7 @@ var Intervals = struct {
 	},
 	Major6: Interval{
 		value: 9,
-		name:  "M6",
+		name:  "6",
 		upper: false,
 	},
 	Sharp6: Interval{
@@ -99,7 +99,7 @@ var Intervals = struct {
 	},
 	Minor7: Interval{
 		value: 10,
-		name:  "m7",
+		name:  "7",
 		upper: false,
 	},
 	Major7: Interval{
@@ -119,7 +119,7 @@ var Intervals = struct {
 	},
 	Sharp9: Interval{
 		value: 2,
-		name:  "9",
+		name:  "#9",
 		upper: true,
 	},
 	Natural11: Interval{
