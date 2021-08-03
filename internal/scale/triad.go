@@ -31,6 +31,9 @@ func NewTriad(notes []Note) (*Triad, error) {
 
 	root := notes[0]
 	third, err := root.CalculateInterval(notes[1])
+	if err != nil {
+		return nil, errors.Wrap(err, "contains invalid intervals")
+	}
 	fifth, err := root.CalculateInterval(notes[2])
 	if err != nil {
 		return nil, errors.Wrap(err, "contains invalid intervals")
