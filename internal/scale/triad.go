@@ -39,32 +39,32 @@ func NewTriad(notes []Note) (*Triad, error) {
 	// major triad
 	if third.IsEquivalent(&Intervals.Major3) && fifth.IsEquals(&Intervals.Perfect5) {
 		return &Triad{
-			name: root.name,
-			root: &root,
+			name:  root.name,
+			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// minor triad
 	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Perfect5) {
 		return &Triad{
-			name: root.name + "m",
-			root: &root,
+			name:  root.name + "m",
+			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// augmented triad
 	if third.IsEquivalent(&Intervals.Major3) && fifth.IsEquals(&Intervals.Sharp5) {
 		return &Triad{
-			name: root.name + "aug",
-			root: &root,
+			name:  root.name + "aug",
+			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// diminished triad
 	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Flat5) {
 		return &Triad{
-			name: root.name + "dim",
-			root: &root,
+			name:  root.name + "dim",
+			root:  &root,
 			notes: notes,
 		}, nil
 	}
