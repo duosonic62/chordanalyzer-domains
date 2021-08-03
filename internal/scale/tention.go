@@ -28,7 +28,10 @@ func (t Tension) notesNum() int {
 }
 
 func NewTensionCode(notes []Note) (*Tension, error) {
-	triad, err := NewTriad(notes[0:2])
+	if len(notes) < 4 {
+		return nil, errors.New("tension code must contains over 4 notes")
+	}
+	triad, err := NewTriad(notes[0:3])
 	if err != nil {
 		return nil, errors.Wrap(err, "tension code must contains triad")
 	}
