@@ -108,6 +108,14 @@ func (n Note) CalculateInterval(compareNNote Note) (*Interval, error) {
 	return intervalFromNumber(compareNNote.intervalFromC + (scaleNoteCount - n.intervalFromC))
 }
 
+func (n Note) CalculateTensionInterval(compareNNote Note) (*Interval, error) {
+	if compareNNote.intervalFromC >= n.intervalFromC {
+		return tensionFromNumber(compareNNote.intervalFromC - n.intervalFromC)
+	}
+
+	return tensionFromNumber(compareNNote.intervalFromC + (scaleNoteCount - n.intervalFromC))
+}
+
 //GetIntervalNote はInterval分離れたノートを取得する
 func (n Note) GetIntervalNote(interval *Interval) (*Note, error) {
 	noteInterval := n.intervalFromC + interval.value
