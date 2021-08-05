@@ -23,6 +23,10 @@ func (t Tension) Notes() []Note {
 	return notes
 }
 
+func (t Tension) Contains(other Code) bool {
+	panic("implement me")
+}
+
 func (t Tension) notesNum() int {
 	return len(t.tensionNotes) + len(t.triad.notes)
 }
