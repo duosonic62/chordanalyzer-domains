@@ -118,7 +118,7 @@ var Intervals = struct {
 		upper: true,
 	},
 	Sharp9: Interval{
-		value: 2,
+		value: 3,
 		name:  "#9",
 		upper: true,
 	},
@@ -175,6 +175,31 @@ func intervalFromNumber(num int) (*Interval, error) {
 		return &Intervals.Sharp4, nil
 	case 7:
 		return &Intervals.Perfect5, nil
+	case 8:
+		return &Intervals.Minor6, nil
+	case 9:
+		return &Intervals.Major6, nil
+	case 10:
+		return &Intervals.Minor7, nil
+	case 11:
+		return &Intervals.Major7, nil
+	default:
+		return nil, errors.New("scale tone interval must be 0 - 11")
+	}
+}
+
+func tensionFromNumber(num int) (*Interval, error) {
+	switch num {
+	case 1:
+		return &Intervals.Flat9, nil
+	case 2:
+		return &Intervals.Natural9, nil
+	case 3:
+		return &Intervals.Sharp9, nil
+	case 5:
+		return &Intervals.Natural11, nil
+	case 6:
+		return &Intervals.Sharp11, nil
 	case 8:
 		return &Intervals.Minor6, nil
 	case 9:

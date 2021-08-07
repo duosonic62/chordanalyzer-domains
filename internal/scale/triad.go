@@ -23,6 +23,11 @@ func (t Triad) Notes() []Note {
 	return notes
 }
 
+func (t Triad) Contains(other Code) bool {
+	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue
+	return t.Name() == other.Name()
+}
+
 //NewTriad トライアドを生成する
 func NewTriad(notes []Note) (*Triad, error) {
 	if len(notes) != 3 {
