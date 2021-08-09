@@ -143,7 +143,7 @@ func (n Note) Equals(other *Note) bool {
 
 //Equivalent is compare notes (not case sensitive, A# and Bb)
 func (n Note) Equivalent(other *Note) bool {
-	if other != nil {
+	if other == nil {
 		return false
 	}
 

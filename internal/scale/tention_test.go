@@ -36,3 +36,20 @@ func TestTension_Notes(t *testing.T) {
 	}
 }
 
+func TestTension_Contains(t *testing.T) {
+	c7, _ := NewTensionCode([]Note{Notes.C, Notes.E, Notes.G, Notes.B})
+	c, _ := NewTriad([]Note{Notes.C, Notes.E, Notes.G})
+	em, _ := NewTriad([]Note{Notes.E, Notes.G, Notes.B})
+
+	if !c7.Contains(c) {
+		t.Error("Expected: CM7 contains C, but actual doesn't contain")
+	}
+
+	if !c7.Contains(em) {
+		t.Error("Expected: CM7 contains Em, but actual doesn't contain")
+	}
+
+	if em.Contains(c7) {
+		t.Error("Expected: Em doesn't contains CM7, but actual　contains")
+	}
+}
