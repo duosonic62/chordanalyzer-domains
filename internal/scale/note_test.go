@@ -36,3 +36,26 @@ func TestNote_GetIntervalNote(t *testing.T) {
 	}
 }
 
+func TestNote_Equals(t *testing.T) {
+	if !Notes.C.Equals(&Notes.C) {
+		t.Error("Expected: C equals C, but actual doesn't")
+	}
+
+	if Notes.AS.Equals(&Notes.Bb) {
+		t.Error("Expected: A# doesn't equals Bb, but actual equals")
+	}
+}
+
+func TestNote_Equivalent(t *testing.T) {
+	if !Notes.C.Equivalent(&Notes.C) {
+		t.Error("Expected: C equivalent C, but actual doesn't")
+	}
+
+	if !Notes.AS.Equivalent(&Notes.Bb) {
+		t.Error("Expected: A# equivalent Bb, but actual doesn't")
+	}
+
+	if Notes.AS.Equivalent(&Notes.B) {
+		t.Error("Expected: A# doesn't equivalent B, but actual equals")
+	}
+}
