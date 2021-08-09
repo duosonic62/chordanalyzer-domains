@@ -131,7 +131,7 @@ func (n Note) GetIntervalNote(interval *Interval) (*Note, error) {
 	return note, nil
 }
 
-//Equals is compare notes
+//Equals is strict compare notes
 func (n Note) Equals(other *Note) bool {
 	if other == nil {
 		return false
@@ -139,6 +139,15 @@ func (n Note) Equals(other *Note) bool {
 
 	// 名前と音階が一緒なら同値
 	return n.name == other.name && n.intervalFromC == other.intervalFromC
+}
+
+//Equivalent is compare notes (not case sensitive, A# and Bb)
+func (n Note) Equivalent(other *Note) bool {
+	if other != nil {
+		return false
+	}
+
+	return n.intervalFromC == other.intervalFromC
 }
 
 func noteFromInterval(interval int) (*Note, error) {

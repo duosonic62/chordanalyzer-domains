@@ -24,7 +24,29 @@ func (t Tension) Notes() []Note {
 }
 
 func (t Tension) Contains(other Code) bool {
-	panic("implement me")
+	// otherの方がノート数が多ければfalse
+	if len(other.Notes()) > len(t.Notes()) {
+		return false
+	}
+
+	// 1ノートでも含まれていないノートがあれば false
+	for _, on := range other.Notes() {
+		if !t.contains(&on) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (t Tension) contains(note *Note) bool {
+	for _, tn := range t.Notes() {
+		if tn.Equivalent(note) {
+			return true
+		}
+	}
+
+	return false
 }
 
 func (t Tension) notesNum() int {

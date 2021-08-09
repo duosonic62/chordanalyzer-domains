@@ -35,3 +35,4 @@ func TestTension_Notes(t *testing.T) {
 		t.Error("Expected: C, E, G, A, but actual: " + actual.Notes()[0].name + ", " + actual.Notes()[1].name + ", " + actual.Notes()[2].name + ", " + actual.Notes()[3].name)
 	}
 }
+
