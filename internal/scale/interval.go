@@ -156,6 +156,10 @@ func (i Interval) IsEquals(target *Interval) bool {
 	return i.value == target.value && i.upper == target.upper
 }
 
+func (i Interval) String() string {
+	return i.name
+}
+
 //intervalFromNumber は数字からインターバルを復元する
 func intervalFromNumber(num int) (*Interval, error) {
 	switch num {
