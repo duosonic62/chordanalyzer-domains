@@ -1,24 +1,27 @@
-package scale
+package code
 
-import "github.com/pkg/errors"
+import (
+	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/pkg/errors"
+)
 
 type Tension struct {
 	name  string
 	triad *Triad
-	tensionNotes []Note
+	tensionNotes []scale.Note
 }
 
 func (t Tension) Name() string {
 	return t.name
 }
 
-func (t Tension) Root() *Note {
+func (t Tension) Root() *scale.Note {
 	return t.triad.root
 }
 
-func (t Tension) Notes() []Note {
+func (t Tension) Notes() []scale.Note {
 	// 内容を書き換えられても良いようにスライスのコピーを渡す
-	notes := make([]Note, t.notesNum())
+	notes := make([]scale.Note, t.notesNum())
 	copy(notes, append(t.triad.Notes(), t.tensionNotes...))
 	return notes
 }
@@ -39,7 +42,7 @@ func (t Tension) Contains(other Code) bool {
 	return true
 }
 
-func (t Tension) contains(note *Note) bool {
+func (t Tension) contains(note *scale.Note) bool {
 	for _, tn := range t.Notes() {
 		if tn.Equivalent(note) {
 			return true
@@ -53,7 +56,7 @@ func (t Tension) notesNum() int {
 	return len(t.tensionNotes) + len(t.triad.notes)
 }
 
-func NewTensionCode(notes []Note) (*Tension, error) {
+func NewTensionCode(notes []scale.Note) (*Tension, error) {
 	if len(notes) < 4 {
 		return nil, errors.New("tension code must contains over 4 notes")
 	}
@@ -70,7 +73,7 @@ func NewTensionCode(notes []Note) (*Tension, error) {
 		if err != nil {
 			return nil, errors.Wrap(err, "contains invalid intervals")
 		}
-		tensionName = tensionName + interval.name
+		tensionName = tensionName + interval.String()
 	}
 	return &Tension{
 		name:         triad.name + tensionName,

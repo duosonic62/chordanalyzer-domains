@@ -1,24 +1,27 @@
-package scale
+package code
 
-import "github.com/pkg/errors"
+import (
+	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/pkg/errors"
+)
 
 type Triad struct {
 	name  string
-	root  *Note
-	notes []Note
+	root  *scale.Note
+	notes []scale.Note
 }
 
 func (t Triad) Name() string {
 	return t.name
 }
 
-func (t Triad) Root() *Note {
+func (t Triad) Root() *scale.Note {
 	return t.root
 }
 
-func (t Triad) Notes() []Note {
+func (t Triad) Notes() []scale.Note {
 	// 内容を書き換えられても良いようにスライスのコピーを渡す
-	notes := make([]Note, len(t.notes), cap(t.notes))
+	notes := make([]scale.Note, len(t.notes), cap(t.notes))
 	copy(notes, t.notes)
 	return notes
 }
@@ -29,7 +32,7 @@ func (t Triad) Contains(other Code) bool {
 }
 
 //NewTriad トライアドを生成する
-func NewTriad(notes []Note) (*Triad, error) {
+func NewTriad(notes []scale.Note) (*Triad, error) {
 	if len(notes) != 3 {
 		return nil, errors.New("the number of notes in the triad must be 3")
 	}
@@ -45,33 +48,33 @@ func NewTriad(notes []Note) (*Triad, error) {
 	}
 
 	// major triad
-	if third.IsEquivalent(&Intervals.Major3) && fifth.IsEquals(&Intervals.Perfect5) {
+	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
 		return &Triad{
-			name:  root.name,
+			name:  root.String(),
 			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// minor triad
-	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Perfect5) {
+	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
 		return &Triad{
-			name:  root.name + "m",
+			name:  root.String() + "m",
 			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// augmented triad
-	if third.IsEquivalent(&Intervals.Major3) && fifth.IsEquals(&Intervals.Sharp5) {
+	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Sharp5) {
 		return &Triad{
-			name:  root.name + "aug",
+			name:  root.String() + "aug",
 			root:  &root,
 			notes: notes,
 		}, nil
 	}
 	// diminished triad
-	if third.IsEquivalent(&Intervals.Minor3) && fifth.IsEquals(&Intervals.Flat5) {
+	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Flat5) {
 		return &Triad{
-			name:  root.name + "dim",
+			name:  root.String() + "dim",
 			root:  &root,
 			notes: notes,
 		}, nil

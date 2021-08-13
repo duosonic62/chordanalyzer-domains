@@ -150,6 +150,10 @@ func (n Note) Equivalent(other *Note) bool {
 	return n.intervalFromC == other.intervalFromC
 }
 
+func (n Note) String() string {
+	return n.name
+}
+
 func noteFromInterval(interval int) (*Note, error) {
 	switch interval {
 	case 0:
