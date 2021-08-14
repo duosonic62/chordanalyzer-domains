@@ -8,3 +8,17 @@ type Code interface {
 	Notes() []scale.Note
 	Contains(other Code) bool
 }
+
+type Factory struct {
+	intervals []scale.Interval
+}
+
+func NewCodeFactory(intervals []scale.Interval) *Factory {
+	return &Factory{
+		intervals: intervals,
+	}
+}
+
+func (f Factory) CreateCodes() (error, []Code) {
+	return nil, nil
+}
