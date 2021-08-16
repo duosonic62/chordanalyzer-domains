@@ -39,6 +39,22 @@ func (f Factory) Build() ([]Code, error) {
 	return tensions, nil
 }
 
+func (f Factory) BuildWithName(name string) ([]Code, error) {
+	if len(f.intervals) == 3 {
+		triads, err := f.createTriads()
+		if err != nil {
+			return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+		}
+		return triads, nil
+	}
+
+	tensions, err := f.createTensionWithName(name)
+	if err != nil {
+		return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+	}
+	return tensions, nil
+}
+
 func (f Factory) createTriads() ([]Code, error) {
 	allNotes := scale.AllNotes()
 	triads := make([]Code, len(allNotes))
@@ -66,6 +82,24 @@ func (f Factory) createTension() ([]Code, error) {
 			return nil, err
 		}
 		tension, err := NewTensionCode(notes)
+		if err != nil {
+			return nil, err
+		}
+		tensions[i] = tension
+	}
+
+	return tensions, nil
+}
+
+func (f Factory) createTensionWithName(name string) ([]Code, error) {
+	allNotes := scale.AllNotes()
+	tensions := make([]Code, len(allNotes))
+	for i, root := range scale.AllNotes() {
+		notes, err := getNotes(root, f.intervals)
+		if err != nil {
+			return nil, err
+		}
+		tension, err := NewTensionCodeWithName(notes, root.String() + name)
 		if err != nil {
 			return nil, err
 		}
