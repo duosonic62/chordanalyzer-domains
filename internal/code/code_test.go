@@ -99,3 +99,51 @@ func TestFactory_Build_Tension(t *testing.T) {
 		t.Error("Expected: B7, but actual: " + codes[11].Name())
 	}
 }
+
+func TestFactory_BuildWithName(t *testing.T) {
+	intervals := []scale.Interval{
+		scale.Intervals.R,
+		scale.Intervals.Minor3,
+		scale.Intervals.Flat5,
+		scale.Intervals.Minor7,
+	}
+
+	factory := NewCodeFactory(intervals)
+	codes, _ := factory.BuildWithName("m7b5")
+	if "Cm7b5" != codes[0].Name() {
+		t.Error("Expected: Cm7b5, but actual: " + codes[0].Name())
+	}
+	if "C#m7b5" != codes[1].Name() {
+		t.Error("Expected: C#m7b5, but actual: " + codes[1].Name())
+	}
+	if "Dm7b5" != codes[2].Name() {
+		t.Error("Expected: Dm7b5, but actual: " + codes[2].Name())
+	}
+	if "D#m7b5" != codes[3].Name() {
+		t.Error("Expected: D#m7b5, but actual: " + codes[3].Name())
+	}
+	if "Em7b5" != codes[4].Name() {
+		t.Error("Expected: Em7b5, but actual: " + codes[4].Name())
+	}
+	if "Fm7b5" != codes[5].Name() {
+		t.Error("Expected: Fm7b5, but actual: " + codes[5].Name())
+	}
+	if "F#m7b5" != codes[6].Name() {
+		t.Error("Expected: F#m7b5, but actual: " + codes[6].Name())
+	}
+	if "Gm7b5" != codes[7].Name() {
+		t.Error("Expected: Gm7b5, but actual: " + codes[7].Name())
+	}
+	if "G#m7b5" != codes[8].Name() {
+		t.Error("Expected: G#m7b5, but actual: " + codes[8].Name())
+	}
+	if "Am7b5" != codes[9].Name() {
+		t.Error("Expected: Am7b5, but actual: " + codes[9].Name())
+	}
+	if "A#m7b5" != codes[10].Name() {
+		t.Error("Expected: A#m7b5, but actual: " + codes[10].Name())
+	}
+	if "Bm7b5" != codes[11].Name() {
+		t.Error("Expected: Bm7b5, but actual: " + codes[11].Name())
+	}
+}

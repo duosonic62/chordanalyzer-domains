@@ -22,6 +22,7 @@ func NewCodeFactory(intervals []scale.Interval) *Factory {
 	}
 }
 
+//Build is create code instances slice
 func (f Factory) Build() ([]Code, error) {
 
 	if len(f.intervals) == 3 {
@@ -39,6 +40,9 @@ func (f Factory) Build() ([]Code, error) {
 	return tensions, nil
 }
 
+//BuildWithName is create tension code with name
+//Use this function to generate code whose name is difficult to guess. (e.g. Cm7b5 and Cdim7)
+//For triad codes, the name will be ignored.
 func (f Factory) BuildWithName(name string) ([]Code, error) {
 	if len(f.intervals) == 3 {
 		triads, err := f.createTriads()
