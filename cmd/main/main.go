@@ -17,6 +17,6 @@ func main() {
 			panic(err)
 		}
 
-		fmt.Printf(codes[0].Name())
+		fmt.Println(codes[0].Name())
 	}
 }
