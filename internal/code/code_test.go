@@ -12,7 +12,7 @@ func TestFactory_Build_Triad(t *testing.T) {
 		scale.Intervals.Perfect5,
 	}
 
-	factory := NewCodeFactory(intervals)
+	factory := NewFactory(intervals)
 	codes, _ := factory.Build()
 	if "C" != codes[0].Name() {
 		t.Error("Expected: C, but actual: " + codes[0].Name())
@@ -60,7 +60,7 @@ func TestFactory_Build_Tension(t *testing.T) {
 		scale.Intervals.Minor7,
 	}
 
-	factory := NewCodeFactory(intervals)
+	factory := NewFactory(intervals)
 	codes, _ := factory.Build()
 	if "C7" != codes[0].Name() {
 		t.Error("Expected: C7, but actual: " + codes[0].Name())
@@ -108,7 +108,7 @@ func TestFactory_BuildWithName(t *testing.T) {
 		scale.Intervals.Minor7,
 	}
 
-	factory := NewCodeFactory(intervals)
+	factory := NewFactory(intervals)
 	codes, _ := factory.BuildWithName("m7b5")
 	if "Cm7b5" != codes[0].Name() {
 		t.Error("Expected: Cm7b5, but actual: " + codes[0].Name())

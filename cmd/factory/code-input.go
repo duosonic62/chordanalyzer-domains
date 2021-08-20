@@ -15,7 +15,7 @@ type CodeInput struct {
 	Intervals []string `json:"intervals"`
 }
 
-func ReadCodesFromJson(filePath string) (*[]CodeInput, error) {
+func ReadCodesFromJson(filePath string) ([]CodeInput, error) {
 	raw, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil, err
@@ -27,5 +27,5 @@ func ReadCodesFromJson(filePath string) (*[]CodeInput, error) {
 		return nil, err
 	}
 
-	return &codeInputCollection.Codes, nil
+	return codeInputCollection.Codes, nil
 }

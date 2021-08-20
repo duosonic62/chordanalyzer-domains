@@ -16,7 +16,7 @@ type Factory struct {
 	intervals []scale.Interval
 }
 
-func NewCodeFactory(intervals []scale.Interval) *Factory {
+func NewFactory(intervals []scale.Interval) *Factory {
 	return &Factory{
 		intervals: intervals,
 	}

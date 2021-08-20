@@ -144,6 +144,10 @@ var Intervals = struct {
 	},
 }
 
+func NewInterval(name string) (*Interval, error) {
+	return intervalFromName(name)
+}
+
 //IsEquivalent はインターバルが等価であるか比較する
 //同オクターブ上でなくても同じ音解であれば等価とする
 func (i Interval) IsEquivalent(target *Interval) bool {
@@ -214,5 +218,56 @@ func tensionFromNumber(num int) (*Interval, error) {
 		return &Intervals.Major7, nil
 	default:
 		return nil, errors.New("scale tone interval must be 0 - 11")
+	}
+}
+
+func intervalFromName(name string) (*Interval, error) {
+	switch name {
+	case "R":
+		return &Intervals.R, nil
+	case "m2":
+		return &Intervals.Minor2, nil
+	case "M2":
+		return &Intervals.Major2, nil
+	case "m3":
+		return &Intervals.Minor3, nil
+	case "M3":
+		return &Intervals.Major3, nil
+	case "P4":
+		return &Intervals.Perfect4, nil
+	case "#4":
+		return &Intervals.Sharp4, nil
+	case "b5":
+		return &Intervals.Flat5, nil
+	case "P5":
+		return &Intervals.Perfect5, nil
+	case "#5":
+		return &Intervals.Sharp5, nil
+	case "m6":
+		return &Intervals.Minor6, nil
+	case "6":
+		return &Intervals.Major6, nil
+	case "#6":
+		return &Intervals.Sharp6, nil
+	case "7":
+		return &Intervals.Minor7, nil
+	case "M7":
+		return &Intervals.Major7, nil
+	case "b9":
+		return &Intervals.Flat9, nil
+	case "9":
+		return &Intervals.Natural9, nil
+	case "#9":
+		return &Intervals.Sharp9, nil
+	case "11":
+		return &Intervals.Natural11, nil
+	case "#11":
+		return &Intervals.Sharp11, nil
+	case "b13":
+		return &Intervals.Flat13, nil
+	case "13":
+		return &Intervals.Natural13, nil
+	default:
+		return nil, errors.New("this scale name doesn't support: " + name)
 	}
 }
