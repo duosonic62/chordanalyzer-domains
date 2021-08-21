@@ -3,21 +3,30 @@ package factory
 import (
 	"github.com/duosonic62/codanalyzer-domains/internal/code"
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/pkg/errors"
 )
 
 func CreateCodes(codeInput CodeInput) ([]code.Code, error) {
 	intervals, err := stringsToIntervals(codeInput.Intervals)
 	if err != nil {
-		return nil, err
+		return nil, errors.Wrap(err, "failed to generate code")
 	}
 
 	factory :=  code.NewFactory(intervals)
 	// If the code name exists, specify it and build it.
 	if codeInput.Name != "" {
-		return factory.BuildWithName(codeInput.Name)
+		codes, err := factory.BuildWithName(codeInput.Name)
+		if err != nil {
+			return nil, errors.Wrap(err, "failed to generate code")
+		}
+		return codes, nil
 	}
 
-	return factory.Build()
+	codes, err := factory.Build()
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to generate code")
+	}
+	return codes, nil
 }
 
 func stringsToIntervals(rawIntervals []string) ([]scale.Interval, error) {

@@ -2,6 +2,23 @@ package scale
 
 import "testing"
 
+func TestNewInterval(t *testing.T) {
+	interval, _ := NewInterval("R")
+	if !interval.IsEquals(&Intervals.R) {
+		t.Error("Expected: R, but actual: " + interval.String())
+	}
+
+	interval, _ = NewInterval("b9")
+	if !interval.IsEquals(&Intervals.Flat9) {
+		t.Error("Expected: b9, but actual: " + interval.String())
+	}
+
+	_, err := NewInterval("m9")
+	if err == nil {
+		t.Error("Expected: error is not nil, but error is nil")
+	}
+}
+
 func TestInterval_IsEquivalent(t *testing.T) {
 	a := Intervals.Natural9
 	b := Intervals.Major2

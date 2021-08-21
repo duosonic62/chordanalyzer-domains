@@ -28,14 +28,14 @@ func (f Factory) Build() ([]Code, error) {
 	if len(f.intervals) == 3 {
 		triads, err := f.createTriads()
 		if err != nil {
-			return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+			return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
 		}
 		return triads, nil
 	}
 
 	tensions, err := f.createTension()
 	if err != nil {
-		return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+		return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
 	}
 	return tensions, nil
 }
@@ -47,14 +47,14 @@ func (f Factory) BuildWithName(name string) ([]Code, error) {
 	if len(f.intervals) == 3 {
 		triads, err := f.createTriads()
 		if err != nil {
-			return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+			return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
 		}
 		return triads, nil
 	}
 
 	tensions, err := f.createTensionWithName(name)
 	if err != nil {
-		return nil, errors.Wrap(err, "can't build codes, there are incorrect intervals")
+		return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
 	}
 	return tensions, nil
 }
