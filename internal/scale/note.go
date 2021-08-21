@@ -184,3 +184,20 @@ func noteFromInterval(interval int) (*Note, error) {
 		return nil, errors.New("note interval must be 0 - 11")
 	}
 }
+
+func AllNotes() []Note {
+	return [] Note{
+		Notes.C,
+		Notes.CS,
+		Notes.D,
+		Notes.DS,
+		Notes.E,
+		Notes.F,
+		Notes.FS,
+		Notes.G,
+		Notes.GS,
+		Notes.A,
+		Notes.AS,
+		Notes.B,
+	}
+}

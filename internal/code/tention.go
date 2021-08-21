@@ -81,3 +81,20 @@ func NewTensionCode(notes []scale.Note) (*Tension, error) {
 		tensionNotes: tensionNotes,
 	}, nil
 }
+
+func NewTensionCodeWithName(notes []scale.Note, name string) (*Tension, error) {
+	if len(notes) < 4 {
+		return nil, errors.New("tension code must contains over 4 notes")
+	}
+	triad, err := NewTriad(notes[0:3])
+	if err != nil {
+		return nil, errors.Wrap(err, "tension code must contains triad")
+	}
+
+	tensionNotes := notes[3:]
+	return &Tension{
+		name:         name,
+		triad:        triad,
+		tensionNotes: tensionNotes,
+	}, nil
+}
