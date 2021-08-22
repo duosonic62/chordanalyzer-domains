@@ -4,6 +4,27 @@ type Collection interface {
 	Filter(f func(code Code) bool) []Code
 }
 
+type CollectionFactory struct {
+	codes []InOctave
+}
+
+func NewCollectionFactory() CollectionFactory {
+	return CollectionFactory{
+		codes: []InOctave{},
+	}
+}
+
+func (f CollectionFactory) Append(octave InOctave) CollectionFactory {
+	f.codes = append(f.codes, octave)
+	return f
+}
+
+func (f CollectionFactory) Build() Collection {
+	return collection{
+		allCodes: f.codes,
+	}
+}
+
 type InOctave struct {
 	Name string
 	Codes []Code
