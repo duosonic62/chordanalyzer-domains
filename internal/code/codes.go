@@ -1,7 +1,7 @@
 package code
 
 type Collection interface {
-	Filter(f func(code Code) (bool, error)) ([]Code, error)
+	Filter(f func(code Code) bool) []Code
 }
 
 type InOctave struct {
@@ -13,21 +13,17 @@ type collection struct {
 	allCodes []InOctave
 }
 
-func (c collection) Filter(f func(code Code) (bool, error)) ([]Code, error) {
+func (c collection) Filter(f func(code Code) bool) []Code {
 	var filtered []Code
 	for _, inOctave := range c.allCodes {
 		for _, code := range inOctave.Codes {
-			ok, err := f(code)
-			if err != nil {
-				return nil, err
-			}
-			if ok {
+			if f(code) {
 				filtered = append(filtered, code)
 			}
 		}
 	}
 
-	return filtered, nil
+	return filtered
 }
 
 
