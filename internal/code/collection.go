@@ -1,7 +1,7 @@
 package code
 
 type Collection interface {
-	Filter(f func(code Code) bool) []Code
+	Filter(filter func(code Code) bool) []Code
 }
 
 type CollectionFactory struct {
@@ -34,11 +34,11 @@ type collection struct {
 	allCodes []InOctave
 }
 
-func (c collection) Filter(f func(code Code) bool) []Code {
+func (c collection) Filter(filter func(code Code) bool) []Code {
 	var filtered []Code
 	for _, inOctave := range c.allCodes {
 		for _, code := range inOctave.Codes {
-			if f(code) {
+			if filter(code) {
 				filtered = append(filtered, code)
 			}
 		}
