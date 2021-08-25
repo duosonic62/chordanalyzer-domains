@@ -1,5 +1,11 @@
 package code
 
+import (
+	"errors"
+	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"strconv"
+)
+
 type Collection interface {
 	Filter(filter func(code Code) bool) []Code
 }
@@ -14,8 +20,8 @@ func NewCollectionFactory() CollectionFactory {
 	}
 }
 
-func (f CollectionFactory) Append(octave InOctave) CollectionFactory {
-	f.codes = append(f.codes, octave)
+func (f CollectionFactory) Append(codesInOctave InOctave) CollectionFactory {
+	f.codes = append(f.codes, codesInOctave)
 	return f
 }
 
@@ -25,8 +31,16 @@ func (f CollectionFactory) Build() Collection {
 	}
 }
 
+func NewCodesInOctave(codes []Code) (*InOctave, error) {
+	if len(codes) != scale.NoteCount {
+		return nil, errors.New("codes in octave must contain " + strconv.Itoa(scale.NoteCount) + " codes")
+	}
+	return &InOctave{
+		Codes: codes,
+	}, nil
+}
+
 type InOctave struct {
-	Name string
 	Codes []Code
 }
 
