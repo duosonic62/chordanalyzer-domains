@@ -8,6 +8,7 @@ import (
 
 type Collection interface {
 	Filter(filter func(code Code) bool) []Code
+	ForEach(do func(code Code))
 }
 
 type CollectionFactory struct {
@@ -20,8 +21,8 @@ func NewCollectionFactory() CollectionFactory {
 	}
 }
 
-func (f CollectionFactory) Append(codesInOctave InOctave) CollectionFactory {
-	f.codes = append(f.codes, codesInOctave)
+func (f CollectionFactory) Append(codesInOctave *InOctave) CollectionFactory {
+	f.codes = append(f.codes, *codesInOctave)
 	return f
 }
 
@@ -50,6 +51,7 @@ type collection struct {
 
 func (c collection) Filter(filter func(code Code) bool) []Code {
 	var filtered []Code
+	//TOD change to concurrent code
 	for _, inOctave := range c.allCodes {
 		for _, code := range inOctave.Codes {
 			if filter(code) {
@@ -61,5 +63,11 @@ func (c collection) Filter(filter func(code Code) bool) []Code {
 	return filtered
 }
 
-
-
+func (c collection) ForEach(do func(code Code)) {
+	//TOD change to concurrent code
+	for _, inOctave := range c.allCodes {
+		for _, code := range inOctave.Codes {
+			do(code)
+		}
+	}
+}
