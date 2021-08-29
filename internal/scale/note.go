@@ -8,7 +8,7 @@ type Note struct {
 }
 
 // クロマチックスケールの音数
-var scaleNoteCount = 12
+var NoteCount = 12
 
 var Notes = struct {
 	C  Note
@@ -105,7 +105,7 @@ func (n Note) CalculateInterval(compareNNote Note) (*Interval, error) {
 		return intervalFromNumber(compareNNote.intervalFromC - n.intervalFromC)
 	}
 
-	return intervalFromNumber(compareNNote.intervalFromC + (scaleNoteCount - n.intervalFromC))
+	return intervalFromNumber(compareNNote.intervalFromC + (NoteCount - n.intervalFromC))
 }
 
 func (n Note) CalculateTensionInterval(compareNNote Note) (*Interval, error) {
@@ -113,14 +113,14 @@ func (n Note) CalculateTensionInterval(compareNNote Note) (*Interval, error) {
 		return tensionFromNumber(compareNNote.intervalFromC - n.intervalFromC)
 	}
 
-	return tensionFromNumber(compareNNote.intervalFromC + (scaleNoteCount - n.intervalFromC))
+	return tensionFromNumber(compareNNote.intervalFromC + (NoteCount - n.intervalFromC))
 }
 
 //GetIntervalNote はInterval分離れたノートを取得する
 func (n Note) GetIntervalNote(interval *Interval) (*Note, error) {
 	noteInterval := n.intervalFromC + interval.value
-	if noteInterval >= scaleNoteCount {
-		noteInterval = noteInterval - scaleNoteCount
+	if noteInterval >= NoteCount {
+		noteInterval = noteInterval - NoteCount
 	}
 
 	note, err := noteFromInterval(noteInterval)
