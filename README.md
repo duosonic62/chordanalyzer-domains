@@ -12,22 +12,17 @@ CodeInputs:
     - version
     - codes
     properties:
-    version:
-      type: string
-      description: バージョン情報
-      example: '1.0.0'
     codes:
       type: array
       description: コード構造の入力の集合
       items:
         type: object
         required: 
-          - name
           - intervals
         properties:
           name:
            type: string
-           description: コード名
+           description: コード名(オプション Em7b5やEdim7などの特殊なコードの場合に指定)
            example: 'M7'
           intervals:
             type: array
