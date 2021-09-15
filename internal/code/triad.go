@@ -47,11 +47,31 @@ func NewTriad(notes []scale.Note) (*Triad, error) {
 		return nil, errors.Wrap(err, "contains invalid intervals")
 	}
 
+	return newTriad(&root, []scale.Interval{scale.Intervals.R, *third, *fifth})
+}
+
+func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
+	if len(intervals) != 3 {
+		return nil, errors.New("the number of notes in the triad must be 3")
+	}
+
+	third := intervals[1]
+	fifth := intervals[2]
+	notes := make([]scale.Note, 3, 3)
+
+	for i, interval := range intervals {
+		note, err := root.GetIntervalNote(&interval)
+		if err != nil {
+			return nil, err
+		}
+		notes[i] = *note
+	}
+
 	// major triad
 	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String(),
-			root:  &root,
+			root:  root,
 			notes: notes,
 		}, nil
 	}
@@ -59,7 +79,7 @@ func NewTriad(notes []scale.Note) (*Triad, error) {
 	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String() + "m",
-			root:  &root,
+			root:  root,
 			notes: notes,
 		}, nil
 	}
@@ -67,7 +87,7 @@ func NewTriad(notes []scale.Note) (*Triad, error) {
 	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Sharp5) {
 		return &Triad{
 			name:  root.String() + "aug",
-			root:  &root,
+			root:  root,
 			notes: notes,
 		}, nil
 	}
@@ -75,7 +95,7 @@ func NewTriad(notes []scale.Note) (*Triad, error) {
 	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Flat5) {
 		return &Triad{
 			name:  root.String() + "dim",
-			root:  &root,
+			root:  root,
 			notes: notes,
 		}, nil
 	}
