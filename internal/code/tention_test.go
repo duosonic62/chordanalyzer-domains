@@ -41,8 +41,8 @@ func TestTension_Notes(t *testing.T) {
 
 func TestTension_Contains(t *testing.T) {
 	c7, _ := NewTensionCode([]scale.Note{scale.Notes.C, scale.Notes.E, scale.Notes.G, scale.Notes.B})
-	c, _ := NewTriad([]scale.Note{scale.Notes.C, scale.Notes.E, scale.Notes.G})
-	em, _ := NewTriad([]scale.Note{scale.Notes.E, scale.Notes.G, scale.Notes.B})
+	c, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
+	em, _ := NewTriad(&scale.Notes.E, []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5})
 
 	if !c7.Contains(c) {
 		t.Error("Expected: CM7 contains C, but actual doesn't contain")

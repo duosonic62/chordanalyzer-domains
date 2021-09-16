@@ -32,22 +32,15 @@ func (t Triad) Contains(other Code) bool {
 }
 
 //NewTriad トライアドを生成する
-func NewTriad(notes []scale.Note) (*Triad, error) {
-	if len(notes) != 3 {
+func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
+	if len(intervals) != 3 {
 		return nil, errors.New("the number of notes in the triad must be 3")
 	}
 
-	root := notes[0]
-	third, err := root.CalculateInterval(notes[1])
-	if err != nil {
-		return nil, errors.Wrap(err, "contains invalid intervals")
-	}
-	fifth, err := root.CalculateInterval(notes[2])
-	if err != nil {
-		return nil, errors.Wrap(err, "contains invalid intervals")
-	}
+	third := intervals[1]
+	fifth := intervals[2]
 
-	return newTriad(&root, []scale.Interval{scale.Intervals.R, *third, *fifth})
+	return newTriad(root, []scale.Interval{scale.Intervals.R, third, fifth})
 }
 
 func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {

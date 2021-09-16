@@ -63,11 +63,7 @@ func (f Factory) createTriads() ([]Code, error) {
 	allNotes := scale.AllNotes()
 	triads := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		triad, err := NewTriad(notes)
+		triad, err := NewTriad(&root, f.intervals)
 		if err != nil {
 			return nil, err
 		}
