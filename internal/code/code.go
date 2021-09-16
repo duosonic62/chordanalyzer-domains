@@ -77,11 +77,7 @@ func (f Factory) createTension() ([]Code, error) {
 	allNotes := scale.AllNotes()
 	tensions := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		tension, err := NewTensionCode(notes)
+		tension, err := NewTensionCode(&root, f.intervals)
 		if err != nil {
 			return nil, err
 		}
@@ -95,11 +91,7 @@ func (f Factory) createTensionWithName(name string) ([]Code, error) {
 	allNotes := scale.AllNotes()
 	tensions := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		tension, err := NewTensionCodeWithName(notes, root.String() + name)
+		tension, err := NewTensionCodeWithName(root.String() + name, &root, f.intervals)
 		if err != nil {
 			return nil, err
 		}

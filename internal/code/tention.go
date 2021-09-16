@@ -56,25 +56,27 @@ func (t Tension) notesNum() int {
 	return len(t.tensionNotes) + len(t.triad.notes)
 }
 
-func NewTensionCode(notes []scale.Note) (*Tension, error) {
-	if len(notes) < 4 {
+func NewTensionCode(root *scale.Note, intervals []scale.Interval) (*Tension, error) {
+	if len(intervals) < 4 {
 		return nil, errors.New("tension code must contains over 4 notes")
 	}
-	triad, err := NewTriad(notes[0:3])
+	triad, err := NewTriad(root, intervals[0:3])
 	if err != nil {
 		return nil, errors.Wrap(err, "tension code must contains triad")
 	}
 
-	tensionNotes := notes[3:]
+	tensionIntervals := intervals[3:]
 
 	var tensionName string
-	for _, note := range tensionNotes {
-		interval, err := triad.root.CalculateTensionInterval(note)
-		if err != nil {
-			return nil, errors.Wrap(err, "contains invalid intervals")
-		}
+	for _, interval := range tensionIntervals {
 		tensionName = tensionName + interval.String()
 	}
+
+	tensionNotes, err := intervalsToNotes(root, tensionIntervals)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Tension{
 		name:         triad.name + tensionName,
 		triad:        triad,
@@ -82,19 +84,37 @@ func NewTensionCode(notes []scale.Note) (*Tension, error) {
 	}, nil
 }
 
-func NewTensionCodeWithName(notes []scale.Note, name string) (*Tension, error) {
-	if len(notes) < 4 {
+func NewTensionCodeWithName(name string, root *scale.Note, intervals []scale.Interval) (*Tension, error) {
+	if len(intervals) < 4 {
 		return nil, errors.New("tension code must contains over 4 notes")
 	}
-	triad, err := NewTriad(notes[0:3])
+	triad, err := NewTriad(root, intervals[0:3])
 	if err != nil {
 		return nil, errors.Wrap(err, "tension code must contains triad")
 	}
 
-	tensionNotes := notes[3:]
+	tensionIntervals := intervals[3:]
+	tensionNotes, err := intervalsToNotes(root, tensionIntervals)
+	if err != nil {
+		return nil, err
+	}
+
 	return &Tension{
 		name:         name,
 		triad:        triad,
 		tensionNotes: tensionNotes,
 	}, nil
+}
+
+func intervalsToNotes(root *scale.Note, intervals []scale.Interval) ([]scale.Note, error) {
+	notes := make([]scale.Note, len(intervals), len(intervals))
+	for i, interval := range intervals {
+		note, err := root.GetIntervalNote(&interval)
+		if err != nil {
+			return nil, err
+		}
+		notes[i] = *note
+	}
+
+	return notes, nil
 }
