@@ -107,7 +107,7 @@ func NewTensionCodeWithName(name string, root *scale.Note, intervals []scale.Int
 }
 
 func intervalsToNotes(root *scale.Note, intervals []scale.Interval) ([]scale.Note, error) {
-	notes := make([]scale.Note, len(intervals), len(intervals))
+	notes := make([]scale.Note, len(intervals))
 	for i, interval := range intervals {
 		note, err := root.GetIntervalNote(&interval)
 		if err != nil {

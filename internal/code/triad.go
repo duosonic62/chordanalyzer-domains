@@ -50,7 +50,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 
 	third := intervals[1]
 	fifth := intervals[2]
-	notes := make([]scale.Note, 3, 3)
+	notes := make([]scale.Note, 3)
 
 	for i, interval := range intervals {
 		note, err := root.GetIntervalNote(&interval)
