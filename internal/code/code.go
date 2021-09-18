@@ -100,16 +100,3 @@ func (f Factory) createTensionWithName(name string) ([]Code, error) {
 
 	return tensions, nil
 }
-
-func getNotes(root scale.Note, intervals []scale.Interval) ([]scale.Note, error) {
-	notes := make([]scale.Note, len(intervals))
-	for i, interval := range intervals {
-		n, err := root.GetIntervalNote(&interval)
-		if err != nil {
-			return nil, err
-		}
-		notes[i] = *n
-	}
-
-	return notes, nil
-}
