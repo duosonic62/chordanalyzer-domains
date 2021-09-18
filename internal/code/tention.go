@@ -6,8 +6,8 @@ import (
 )
 
 type Tension struct {
-	name  string
-	triad *Triad
+	name         string
+	triad        *Triad
 	tensionNotes []scale.Note
 }
 
