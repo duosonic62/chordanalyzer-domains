@@ -6,13 +6,10 @@ import (
 )
 
 type Triad struct {
-	name  string
-	root  *scale.Note
-	notes []scale.Note
-}
-
-func (t Triad) Intervals() []scale.Interval {
-	panic("implement me")
+	name      string
+	root      *scale.Note
+	notes     []scale.Note
+	intervals []scale.Interval
 }
 
 func (t Triad) Name() string {
@@ -29,6 +26,14 @@ func (t Triad) Notes() []scale.Note {
 	copy(notes, t.notes)
 	return notes
 }
+
+func (t Triad) Intervals() []scale.Interval {
+	// 内容を書き換えられても良いようにスライスのコピーを渡す
+	intervals := make([]scale.Interval, len(t.notes), cap(t.notes))
+	copy(intervals, t.intervals)
+	return intervals
+}
+
 
 func (t Triad) Contains(other Code) bool {
 	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue

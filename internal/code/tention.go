@@ -6,13 +6,10 @@ import (
 )
 
 type Tension struct {
-	name         string
-	triad        *Triad
-	tensionNotes []scale.Note
-}
-
-func (t Tension) Intervals() []scale.Interval {
-	panic("implement me")
+	name             string
+	triad            *Triad
+	tensionNotes     []scale.Note
+	tensionIntervals []scale.Interval
 }
 
 func (t Tension) Name() string {
@@ -28,6 +25,13 @@ func (t Tension) Notes() []scale.Note {
 	notes := make([]scale.Note, t.notesNum())
 	copy(notes, append(t.triad.Notes(), t.tensionNotes...))
 	return notes
+}
+
+func (t Tension) Intervals() []scale.Interval {
+	// 内容を書き換えられても良いようにスライスのコピーを渡す
+	intervals := make([]scale.Interval, t.notesNum())
+	copy(intervals, append(t.triad.Intervals(), t.tensionIntervals...))
+	return intervals
 }
 
 func (t Tension) Contains(other Code) bool {
@@ -85,6 +89,7 @@ func NewTensionCode(root *scale.Note, intervals []scale.Interval) (*Tension, err
 		name:         triad.name + tensionName,
 		triad:        triad,
 		tensionNotes: tensionNotes,
+		tensionIntervals: tensionIntervals,
 	}, nil
 }
 
@@ -107,6 +112,7 @@ func NewTensionCodeWithName(name string, root *scale.Note, intervals []scale.Int
 		name:         name,
 		triad:        triad,
 		tensionNotes: tensionNotes,
+		tensionIntervals: tensionIntervals,
 	}, nil
 }
 
