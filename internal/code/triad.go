@@ -11,6 +11,10 @@ type Triad struct {
 	notes []scale.Note
 }
 
+func (t Triad) Intervals() []scale.Interval {
+	panic("implement me")
+}
+
 func (t Triad) Name() string {
 	return t.name
 }

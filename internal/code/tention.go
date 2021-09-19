@@ -11,6 +11,10 @@ type Tension struct {
 	tensionNotes []scale.Note
 }
 
+func (t Tension) Intervals() []scale.Interval {
+	panic("implement me")
+}
+
 func (t Tension) Name() string {
 	return t.name
 }
