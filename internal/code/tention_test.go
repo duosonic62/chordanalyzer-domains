@@ -39,6 +39,13 @@ func TestTension_Notes(t *testing.T) {
 	}
 }
 
+func TestTension_Intervals(t *testing.T) {
+	actual, _ := NewTensionCode(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5, scale.Intervals.Major6})
+	if !actual.Intervals()[0].IsEquals(&scale.Intervals.R) && actual.Intervals()[1].IsEquals(&scale.Intervals.Major3) && actual.Intervals()[2].IsEquals(&scale.Intervals.Perfect5) && actual.Intervals()[3].IsEquals(&scale.Intervals.Major6) {
+		t.Error("Expected: C, E, G, A, but actual: " + actual.Intervals()[0].String() + ", " + actual.Intervals()[1].String() + ", " + actual.Intervals()[2].String() + ", " + actual.Intervals()[3].String())
+	}
+}
+
 func TestTension_Contains(t *testing.T) {
 	c7, _ := NewTensionCode(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5, scale.Intervals.Major7})
 	c, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})

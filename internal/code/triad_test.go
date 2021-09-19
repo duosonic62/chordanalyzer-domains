@@ -62,7 +62,14 @@ func TestTriad_Root(t *testing.T) {
 func TestTriad_Notes(t *testing.T) {
 	// name == Name()
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
-	if !actual.Notes()[0].Equals(&scale.Notes.C) && actual.Notes()[1].Equals(&scale.Notes.E) && actual.Notes()[2].Equals(&scale.Notes.G)  {
+	if !actual.Notes()[0].Equals(&scale.Notes.C) && actual.Notes()[1].Equals(&scale.Notes.E) && actual.Notes()[2].Equals(&scale.Notes.G) {
 		t.Error("Expected: " + actual.name + ", but actual: " + actual.Name())
+	}
+}
+
+func TestTriad_Intervals(t *testing.T) {
+	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
+	if !actual.Intervals()[0].IsEquals(&scale.Intervals.R) && actual.Intervals()[1].IsEquals(&scale.Intervals.Major3) && actual.Intervals()[2].IsEquals(&scale.Intervals.Perfect5) {
+		t.Error("Expected: C, E, G, but actual: " + actual.Intervals()[0].String() + ", " + actual.Intervals()[1].String() + ", " + actual.Intervals()[2].String())
 	}
 }
