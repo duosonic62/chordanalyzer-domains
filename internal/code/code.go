@@ -63,11 +63,7 @@ func (f Factory) createTriads() ([]Code, error) {
 	allNotes := scale.AllNotes()
 	triads := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		triad, err := NewTriad(notes)
+		triad, err := NewTriad(&root, f.intervals)
 		if err != nil {
 			return nil, err
 		}
@@ -81,11 +77,7 @@ func (f Factory) createTension() ([]Code, error) {
 	allNotes := scale.AllNotes()
 	tensions := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		tension, err := NewTensionCode(notes)
+		tension, err := NewTensionCode(&root, f.intervals)
 		if err != nil {
 			return nil, err
 		}
@@ -99,11 +91,7 @@ func (f Factory) createTensionWithName(name string) ([]Code, error) {
 	allNotes := scale.AllNotes()
 	tensions := make([]Code, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		notes, err := getNotes(root, f.intervals)
-		if err != nil {
-			return nil, err
-		}
-		tension, err := NewTensionCodeWithName(notes, root.String() + name)
+		tension, err := NewTensionCodeWithName(root.String() + name, &root, f.intervals)
 		if err != nil {
 			return nil, err
 		}
@@ -111,17 +99,4 @@ func (f Factory) createTensionWithName(name string) ([]Code, error) {
 	}
 
 	return tensions, nil
-}
-
-func getNotes(root scale.Note, intervals []scale.Interval) ([]scale.Note, error) {
-	notes := make([]scale.Note, len(intervals))
-	for i, interval := range intervals {
-		n, err := root.GetIntervalNote(&interval)
-		if err != nil {
-			return nil, err
-		}
-		notes[i] = *n
-	}
-
-	return notes, nil
 }

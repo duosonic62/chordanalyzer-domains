@@ -8,11 +8,11 @@ import (
 
 func TestAnalyzer_AnalyzeIncludedCodes(t *testing.T) {
 	analyzer := NewAnalyzer(collections)
-	cM7, _ := NewTensionCode([]scale.Note{
-		scale.Notes.C,
-		scale.Notes.E,
-		scale.Notes.G,
-		scale.Notes.B,
+	cM7, _ := NewTensionCode(&scale.Notes.C, []scale.Interval{
+		scale.Intervals.R,
+		scale.Intervals.Major3,
+		scale.Intervals.Perfect5,
+		scale.Intervals.Major7,
 	})
 	actual := analyzer.AnalyzeIncludedCodes(cM7)
 	if len(actual) != 3 {
