@@ -69,7 +69,7 @@ func TestTriad_Notes(t *testing.T) {
 
 func TestTriad_Intervals(t *testing.T) {
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
-	if !actual.Intervals()[0].IsEquals(&scale.Intervals.R) && actual.Intervals()[1].IsEquals(&scale.Intervals.Major3) && actual.Intervals()[2].IsEquals(&scale.Intervals.Perfect5) {
+	if !actual.Intervals()[0].Equals(&scale.Intervals.R) && actual.Intervals()[1].Equals(&scale.Intervals.Major3) && actual.Intervals()[2].Equals(&scale.Intervals.Perfect5) {
 		t.Error("Expected: C, E, G, but actual: " + actual.Intervals()[0].String() + ", " + actual.Intervals()[1].String() + ", " + actual.Intervals()[2].String())
 	}
 }

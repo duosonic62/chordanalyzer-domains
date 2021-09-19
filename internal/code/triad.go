@@ -70,7 +70,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	}
 
 	// major triad
-	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
+	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String(),
 			root:  root,
@@ -78,7 +78,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 		}, nil
 	}
 	// minor triad
-	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Perfect5) {
+	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String() + "m",
 			root:  root,
@@ -86,7 +86,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 		}, nil
 	}
 	// augmented triad
-	if third.IsEquivalent(&scale.Intervals.Major3) && fifth.IsEquals(&scale.Intervals.Sharp5) {
+	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Sharp5) {
 		return &Triad{
 			name:  root.String() + "aug",
 			root:  root,
@@ -94,7 +94,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 		}, nil
 	}
 	// diminished triad
-	if third.IsEquivalent(&scale.Intervals.Minor3) && fifth.IsEquals(&scale.Intervals.Flat5) {
+	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Flat5) {
 		return &Triad{
 			name:  root.String() + "dim",
 			root:  root,

@@ -148,15 +148,15 @@ func NewInterval(name string) (*Interval, error) {
 	return intervalFromName(name)
 }
 
-//IsEquivalent はインターバルが等価であるか比較する
+//Equivalent はインターバルが等価であるか比較する
 //同オクターブ上でなくても同じ音解であれば等価とする
-func (i Interval) IsEquivalent(target *Interval) bool {
+func (i Interval) Equivalent(target *Interval) bool {
 	return i.value == target.value
 }
 
-//IsEquals はインターバルが等値であるか比較する
+//Equals はインターバルが等値であるか比較する
 //同音でないと等値にならない
-func (i Interval) IsEquals(target *Interval) bool {
+func (i Interval) Equals(target *Interval) bool {
 	return i.value == target.value && i.upper == target.upper
 }
 
