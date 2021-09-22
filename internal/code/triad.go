@@ -7,7 +7,7 @@ import (
 
 type Triad struct {
 	name      string
-	root      *scale.Note
+	root      scale.Note
 	notes     []scale.Note
 	intervals []scale.Interval
 }
@@ -17,7 +17,7 @@ func (t Triad) Name() string {
 }
 
 func (t Triad) Root() *scale.Note {
-	return t.root
+	return &t.root
 }
 
 func (t Triad) Notes() []scale.Note {
@@ -48,17 +48,6 @@ func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 
 	third := intervals[1]
 	fifth := intervals[2]
-
-	return newTriad(root, []scale.Interval{scale.Intervals.R, third, fifth})
-}
-
-func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
-	if len(intervals) != 3 {
-		return nil, errors.New("the number of notes in the triad must be 3")
-	}
-
-	third := intervals[1]
-	fifth := intervals[2]
 	notes := make([]scale.Note, 3)
 
 	for i, interval := range intervals {
@@ -73,7 +62,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String(),
-			root:  root,
+			root:  *root,
 			notes: notes,
 		}, nil
 	}
@@ -81,7 +70,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Perfect5) {
 		return &Triad{
 			name:  root.String() + "m",
-			root:  root,
+			root:  *root,
 			notes: notes,
 		}, nil
 	}
@@ -89,7 +78,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Sharp5) {
 		return &Triad{
 			name:  root.String() + "aug",
-			root:  root,
+			root:  *root,
 			notes: notes,
 		}, nil
 	}
@@ -97,7 +86,7 @@ func newTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Flat5) {
 		return &Triad{
 			name:  root.String() + "dim",
-			root:  root,
+			root:  *root,
 			notes: notes,
 		}, nil
 	}
