@@ -225,33 +225,33 @@ func intervalFromName(name string) (*Interval, error) {
 	switch name {
 	case "R":
 		return &Intervals.R, nil
-	case "m2":
+	case "b2":
 		return &Intervals.Minor2, nil
-	case "M2":
+	case "2":
 		return &Intervals.Major2, nil
-	case "m3":
+	case "b3":
 		return &Intervals.Minor3, nil
-	case "M3":
+	case "3":
 		return &Intervals.Major3, nil
-	case "P4":
+	case "4":
 		return &Intervals.Perfect4, nil
 	case "#4":
 		return &Intervals.Sharp4, nil
 	case "b5":
 		return &Intervals.Flat5, nil
-	case "P5":
+	case "5":
 		return &Intervals.Perfect5, nil
 	case "#5":
 		return &Intervals.Sharp5, nil
-	case "m6":
+	case "b6":
 		return &Intervals.Minor6, nil
 	case "6":
 		return &Intervals.Major6, nil
 	case "#6":
 		return &Intervals.Sharp6, nil
-	case "7":
+	case "b7":
 		return &Intervals.Minor7, nil
-	case "M7":
+	case "7":
 		return &Intervals.Major7, nil
 	case "b9":
 		return &Intervals.Flat9, nil
