@@ -30,11 +30,8 @@ func main() {
 
 	collection := collectionFactory.Build()
 	collection.ForEach(func(code code.Code) {
-		fmt.Print(code.Name() + " : "  + code.Root().String())
-		fmt.Println(code.Notes())
 		if code.Root().Equals(&scale.Notes.C) {
 			fmt.Println(code.Name())
 		}
-		//fmt.Println(code.Name())
 	})
 }
