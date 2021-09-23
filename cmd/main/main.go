@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/duosonic62/codanalyzer-domains/cmd/factory"
 	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/scale"
 )
 
 func main() {
@@ -29,6 +30,8 @@ func main() {
 
 	collection := collectionFactory.Build()
 	collection.ForEach(func(code code.Code) {
-		fmt.Println(code.Name())
+		if code.Root().Equals(&scale.Notes.C) {
+			fmt.Println(code.Name())
+		}
 	})
 }

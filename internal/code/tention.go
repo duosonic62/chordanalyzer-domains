@@ -17,7 +17,7 @@ func (t Tension) Name() string {
 }
 
 func (t Tension) Root() *scale.Note {
-	return t.triad.root
+	return t.triad.Root()
 }
 
 func (t Tension) Notes() []scale.Note {

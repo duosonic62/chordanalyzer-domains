@@ -55,7 +55,7 @@ func TestTriad_Root(t *testing.T) {
 	// Root == notes[0]
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
 	if !scale.Notes.C.Equals(actual.Root()) {
-		t.Error("Expected: " + actual.name + ", but actual: " + actual.Name())
+		t.Error("Expected: C, but actual: " + actual.Name())
 	}
 }
 
