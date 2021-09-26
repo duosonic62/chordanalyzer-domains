@@ -34,7 +34,6 @@ func (t Triad) Intervals() []scale.Interval {
 	return intervals
 }
 
-
 func (t Triad) Contains(other Code) bool {
 	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue
 	return t.Name() == other.Name()
@@ -93,3 +92,15 @@ func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 
 	return nil, errors.New("triads must be [major, minor, aug, dim]")
 }
+
+type TriadEnum string
+
+const (
+	Major    TriadEnum = ""
+	Minor    TriadEnum = "m"
+	Augment  TriadEnum = "aug"
+	Diminish TriadEnum = "dim"
+	MajorB5  TriadEnum = "b5"
+	Sus2     TriadEnum = "sus2"
+	Sus4     TriadEnum = "sus4"
+)
