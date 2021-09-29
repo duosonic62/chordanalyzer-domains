@@ -106,16 +106,107 @@ const (
 )
 
 func NewTriadFrom(root *scale.Note, enum TriadEnum) (*Triad, error) {
-	third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
-	fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
-	if err != nil {
-		return nil, err
+	switch enum {
+	case Major:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5},
+		}, nil
+
+	case Minor:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5},
+		}, nil
+
+	case Augment:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Sharp5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Sharp5},
+		}, nil
+
+	case Diminish:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Flat5},
+		}, nil
+
+	case MajorB5:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Perfect5)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Perfect5, scale.Intervals.Flat5},
+		}, nil
+
+	case Sus2:
+		second, err :=  root.GetIntervalNote(&scale.Intervals.Major2)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *second, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect5},
+		}, nil
+
+	case Sus4:
+		fourth, err :=  root.GetIntervalNote(&scale.Intervals.Perfect4)
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *fourth, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect4},
+		}, nil
 	}
 
-	return &Triad{
-		name:      root.String() + string(enum),
-		root:      *root,
-		notes:     []scale.Note{*root, *third, *fifth},
-		intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5},
-	}, nil
+
+
+	return nil, errors.New("unknown triad: " + string(enum))
 }
