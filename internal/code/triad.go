@@ -104,3 +104,18 @@ const (
 	Sus2     TriadEnum = "sus2"
 	Sus4     TriadEnum = "sus4"
 )
+
+func NewTriadFrom(root *scale.Note, enum TriadEnum) (*Triad, error) {
+	third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+	fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Triad{
+		name:      root.String() + string(enum),
+		root:      *root,
+		notes:     []scale.Note{*root, *third, *fifth},
+		intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5},
+	}, nil
+}
