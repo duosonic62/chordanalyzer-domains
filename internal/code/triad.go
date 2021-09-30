@@ -100,7 +100,7 @@ const (
 	Minor    TriadEnum = "m"
 	Augment  TriadEnum = "aug"
 	Diminish TriadEnum = "dim"
-	MajorB5  TriadEnum = "b5"
+	MajorB5  TriadEnum = "Mb5"
 	Sus2     TriadEnum = "sus2"
 	Sus4     TriadEnum = "sus4"
 )
