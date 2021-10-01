@@ -87,7 +87,7 @@ func TestNewTriadFrom(t *testing.T) {
 	}
 
 	// no Triad
-	_, err := NewTriadFrom(&scale.Notes.C, TriadEnum("sample"))
+	_, err := NewTriadFrom(&scale.Notes.C, TriadType("sample"))
 	if err == nil {
 		t.Error("Expected: err, but error is Nil")
 	}

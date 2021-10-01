@@ -93,19 +93,19 @@ func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	return nil, errors.New("triads must be [major, minor, aug, dim]")
 }
 
-type TriadEnum string
+type TriadType string
 
 const (
-	Major    TriadEnum = ""
-	Minor    TriadEnum = "m"
-	Augment  TriadEnum = "aug"
-	Diminish TriadEnum = "dim"
-	MajorB5  TriadEnum = "Mb5"
-	Sus2     TriadEnum = "sus2"
-	Sus4     TriadEnum = "sus4"
+	Major    TriadType = ""
+	Minor    TriadType = "m"
+	Augment  TriadType = "aug"
+	Diminish TriadType = "dim"
+	MajorB5  TriadType = "Mb5"
+	Sus2     TriadType = "sus2"
+	Sus4     TriadType = "sus4"
 )
 
-func NewTriadFrom(root *scale.Note, enum TriadEnum) (*Triad, error) {
+func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 	switch enum {
 	case Major:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
@@ -205,8 +205,6 @@ func NewTriadFrom(root *scale.Note, enum TriadEnum) (*Triad, error) {
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect4},
 		}, nil
 	}
-
-
 
 	return nil, errors.New("unknown triad: " + string(enum))
 }
