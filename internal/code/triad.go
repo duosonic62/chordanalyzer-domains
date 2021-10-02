@@ -109,6 +109,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 	switch enum {
 	case Major:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
 		if err != nil {
 			return nil, err
@@ -123,6 +126,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case Minor:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
 		if err != nil {
 			return nil, err
@@ -137,6 +143,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case Augment:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Sharp5)
 		if err != nil {
 			return nil, err
@@ -151,6 +160,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case Diminish:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
 		if err != nil {
 			return nil, err
@@ -165,6 +177,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case MajorB5:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
 		if err != nil {
 			return nil, err
@@ -179,6 +194,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case Sus2:
 		second, err :=  root.GetIntervalNote(&scale.Intervals.Major2)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
 		if err != nil {
 			return nil, err
@@ -193,6 +211,9 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 
 	case Sus4:
 		fourth, err :=  root.GetIntervalNote(&scale.Intervals.Perfect4)
+		if err != nil {
+			return nil, err
+		}
 		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
 		if err != nil {
 			return nil, err
