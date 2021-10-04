@@ -24,23 +24,23 @@ CodeInputs:
            type: string
            description: コード名(オプション Em7b5やEdim7などの特殊なコードの場合に指定)
            example: 'M7'
-          intervals:
+          triad:
+            type: string
+            description: トライアド
+            enum:
+              - 'Major'
+              - 'Minor'
+              - 'Augment'
+              - 'Diminish'
+              - 'Sus2'
+              - 'Sus4'
+          tension:
             type: array
-            description: コード構成音
-            example: ['R', '3', '5', '7']
+            description: テンション
+            example: ['7', 'b9']
             items:
               type: string
               enum: 
-                - 'R'
-                - 'b2'
-                - '2'
-                - 'b3'
-                - '3'
-                - '4'
-                - '#4'
-                - 'b5'
-                - '5'
-                - '#5'
                 - 'b6'
                 - '6'
                 - 'b7'
