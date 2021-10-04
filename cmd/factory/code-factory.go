@@ -47,21 +47,21 @@ func stringsToIntervals(rawIntervals []string) ([]scale.Interval, error) {
 
 func stringsToTriad(rawTriad string) (code.TriadType, error) {
 	switch rawTriad {
-	case string(code.Major):
+	case "Major":
 		return code.Major, nil
-	case string(code.Minor):
+	case "Minor":
 		return code.Minor, nil
-	case string(code.Augment):
+	case "Augment":
 		return code.Augment, nil
-	case string(code.Diminish):
+	case "Diminish":
 		return code.Diminish, nil
-	case string(code.MajorB5):
+	case "MajorB5":
 		return code.MajorB5, nil
-	case string(code.Sus2):
+	case "Sus2":
 		return code.Sus2, nil
-	case string(code.Sus4):
+	case "Sus4":
 		return code.Sus4, nil
 	}
 
-	return "", errors.New("")
+	return "", errors.New(rawTriad + " is not a valid triad" )
 }

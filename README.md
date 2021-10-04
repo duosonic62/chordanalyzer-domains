@@ -32,6 +32,7 @@ CodeInputs:
               - 'Minor'
               - 'Augment'
               - 'Diminish'
+              - 'MajorB5'
               - 'Sus2'
               - 'Sus4'
           tension:
