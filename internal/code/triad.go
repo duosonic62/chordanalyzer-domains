@@ -34,7 +34,6 @@ func (t Triad) Intervals() []scale.Interval {
 	return intervals
 }
 
-
 func (t Triad) Contains(other Code) bool {
 	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue
 	return t.Name() == other.Name()
@@ -92,4 +91,141 @@ func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	}
 
 	return nil, errors.New("triads must be [major, minor, aug, dim]")
+}
+
+type TriadType string
+
+const (
+	Major    TriadType = ""
+	Minor    TriadType = "m"
+	Augment  TriadType = "aug"
+	Diminish TriadType = "dim"
+	MajorB5  TriadType = "Mb5"
+	Sus2     TriadType = "sus2"
+	Sus4     TriadType = "sus4"
+)
+
+func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
+	switch enum {
+	case Major:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5},
+		}, nil
+
+	case Minor:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5},
+		}, nil
+
+	case Augment:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Sharp5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Sharp5},
+		}, nil
+
+	case Diminish:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Minor3)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Flat5},
+		}, nil
+
+	case MajorB5:
+		third, err :=  root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Flat5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *third, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Perfect5, scale.Intervals.Flat5},
+		}, nil
+
+	case Sus2:
+		second, err :=  root.GetIntervalNote(&scale.Intervals.Major2)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *second, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect5},
+		}, nil
+
+	case Sus4:
+		fourth, err :=  root.GetIntervalNote(&scale.Intervals.Perfect4)
+		if err != nil {
+			return nil, err
+		}
+		fifth, err := root.GetIntervalNote(&scale.Intervals.Perfect5)
+		if err != nil {
+			return nil, err
+		}
+
+		return &Triad{
+			name:      root.String() + string(enum),
+			root:      *root,
+			notes:     []scale.Note{*root, *fourth, *fifth},
+			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect4},
+		}, nil
+	}
+
+	return nil, errors.New("unknown triad: " + string(enum))
 }

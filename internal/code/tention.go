@@ -93,6 +93,34 @@ func NewTensionCode(root *scale.Note, intervals []scale.Interval) (*Tension, err
 	}, nil
 }
 
+func NewTensionCodeFrom(root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
+	if len(tensions) < 1 {
+		return nil, errors.New("tension code must contains over 4 notes")
+	}
+
+	var tensionName string
+	for _, interval := range tensions {
+		tensionName = tensionName + interval.String()
+	}
+
+	tensionNotes, err := intervalsToNotes(root, tensions)
+	if err != nil {
+		return nil, err
+	}
+
+	triad, err := NewTriadFrom(root, triadType)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Tension{
+		name:         triad.name + tensionName,
+		triad:        triad,
+		tensionNotes: tensionNotes,
+		tensionIntervals: tensions,
+	}, nil
+}
+
 func NewTensionCodeWithName(name string, root *scale.Note, intervals []scale.Interval) (*Tension, error) {
 	if len(intervals) < 4 {
 		return nil, errors.New("tension code must contains over 4 notes")
@@ -113,6 +141,29 @@ func NewTensionCodeWithName(name string, root *scale.Note, intervals []scale.Int
 		triad:        triad,
 		tensionNotes: tensionNotes,
 		tensionIntervals: tensionIntervals,
+	}, nil
+}
+
+func NewTensionCodeWithNameFrom(name string, root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
+	if len(tensions) < 1 {
+		return nil, errors.New("tension code must contains over 4 notes")
+	}
+
+	tensionNotes, err := intervalsToNotes(root, tensions)
+	if err != nil {
+		return nil, err
+	}
+
+	triad, err := NewTriadFrom(root, triadType)
+	if err != nil {
+		return nil, err
+	}
+
+	return &Tension{
+		name:         name,
+		triad:        triad,
+		tensionNotes: tensionNotes,
+		tensionIntervals: tensions,
 	}, nil
 }
 

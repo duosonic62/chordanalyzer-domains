@@ -11,8 +11,9 @@ type CodeInputCollection struct {
 }
 
 type CodeInput struct {
-	Name      string   `json:"name"`
-	Intervals []string `json:"intervals"`
+	Name    string   `json:"name"`
+	Triad   string   `json:"triad"`
+	Tension []string `json:"tension"`
 }
 
 func ReadCodesFromJson(filePath string) ([]CodeInput, error) {

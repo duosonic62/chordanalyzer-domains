@@ -43,6 +43,56 @@ func TestNewTriad(t *testing.T) {
 	}
 }
 
+func TestNewTriadFrom(t *testing.T) {
+	// Major Code
+	actual, _ := NewTriadFrom(&scale.Notes.C, Major)
+	if actual.name != "C" {
+		t.Error("Expected: C, but actual: " + actual.name)
+	}
+
+	// Minor
+	actual, _ = NewTriadFrom(&scale.Notes.C, Minor)
+	if actual.name != "Cm" {
+		t.Error("Expected: Cm, but actual: " + actual.name)
+	}
+
+	// Aug
+	actual, _ = NewTriadFrom(&scale.Notes.C, Augment)
+	if actual.name != "Caug" {
+		t.Error("Expected: Caug, but actual: " + actual.name)
+	}
+
+	// Dim
+	actual, _ = NewTriadFrom(&scale.Notes.C, Diminish)
+	if actual.name != "Cdim" {
+		t.Error("Expected: Cdim, but actual: " + actual.name)
+	}
+
+	// Major b5
+	actual, _ = NewTriadFrom(&scale.Notes.C, MajorB5)
+	if actual.name != "CMb5" {
+		t.Error("Expected: Cdim, but actual: " + actual.name)
+	}
+
+	// sus2
+	actual, _ = NewTriadFrom(&scale.Notes.C, Sus2)
+	if actual.name != "Csus2" {
+		t.Error("Expected: Csus2, but actual: " + actual.name)
+	}
+
+	// sus4
+	actual, _ = NewTriadFrom(&scale.Notes.C, Sus4)
+	if actual.name != "Csus4" {
+		t.Error("Expected: Csus4, but actual: " + actual.name)
+	}
+
+	// no Triad
+	_, err := NewTriadFrom(&scale.Notes.C, TriadType("sample"))
+	if err == nil {
+		t.Error("Expected: err, but error is Nil")
+	}
+}
+
 func TestTriad_Name(t *testing.T) {
 	// name == Name()
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})

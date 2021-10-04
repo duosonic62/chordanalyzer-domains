@@ -18,6 +18,32 @@ func TestNewTensionCode(t *testing.T) {
 	}
 }
 
+func TestNewTensionCodeFrom(t *testing.T) {
+	actual, _ := NewTensionCodeFrom(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major6})
+	if actual.name != "C6" {
+		t.Error("Expected: C6, but actual: " + actual.name)
+	}
+
+	// under 3 notes
+	_, err := NewTensionCodeFrom(&scale.Notes.C, Major, []scale.Interval{})
+	if err == nil {
+		t.Error("Expected: err, but error is Nil")
+	}
+}
+
+func TestNewTensionCodeWithNameFrom(t *testing.T) {
+	actual, _ := NewTensionCodeWithNameFrom("Cm7b5", &scale.Notes.C, Diminish, []scale.Interval{scale.Intervals.Major7})
+	if actual.name != "Cm7b5" {
+		t.Error("Expected: C6, but actual: " + actual.name)
+	}
+
+	// under 3 notes
+	_, err := NewTensionCodeFrom(&scale.Notes.C, Major, []scale.Interval{})
+	if err == nil {
+		t.Error("Expected: err, but error is Nil")
+	}
+}
+
 func TestTension_Name(t *testing.T) {
 	actual, _ := NewTensionCode(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5, scale.Intervals.Major6})
 	if actual.Name() != "C6" {
