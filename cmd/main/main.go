@@ -13,7 +13,10 @@ func main() {
 		panic(err)
 	}
 
-	collectionFactory := code.NewCollectionFactory()
+	collectionFactory, err := code.NewCollectionFactory()
+	if err != nil {
+		panic(err)
+	}
 
 	for _, input := range inputs {
 		codes, err := factory.CreateCodes(input)

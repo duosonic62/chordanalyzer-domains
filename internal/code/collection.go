@@ -16,21 +16,58 @@ type CollectionFactory struct {
 	codes []InOctave
 }
 
-func NewCollectionFactory() CollectionFactory {
-	return CollectionFactory{
-		codes: []InOctave{},
+func NewCollectionFactory() (*CollectionFactory, error) {
+	codes, err := buildTriads()
+	if err != nil {
+		return nil, err
 	}
+	return &CollectionFactory{
+		codes: codes,
+	}, nil
 }
 
-func (f CollectionFactory) Append(codesInOctave *InOctave) CollectionFactory {
+func (f CollectionFactory) Append(codesInOctave *InOctave) *CollectionFactory {
 	f.codes = append(f.codes, *codesInOctave)
-	return f
+	return &f
 }
 
 func (f CollectionFactory) Build() Collection {
 	return collection{
 		allCodes: f.codes,
 	}
+}
+
+func buildTriads() ([]InOctave, error) {
+	triadInOctaves := make([]InOctave, len(AllTriadTypes))
+	for i, triadType := range AllTriadTypes {
+		triads, err := buildTriad(triadType)
+		if err != nil {
+			return nil, err
+		}
+
+		triadInOctave, err := NewCodesInOctave(triads)
+		if err != nil {
+			return nil, err
+		}
+
+		triadInOctaves[i] = *triadInOctave
+	}
+
+	return triadInOctaves, nil
+}
+
+func buildTriad(triadType TriadType) ([]Code, error) {
+	triads := make([]Code, len(scale.AllNotes()))
+	for i, root := range scale.AllNotes() {
+		triad, err :=  NewTriadFrom(&root, triadType)
+		if err != nil {
+			return nil, err
+		}
+
+		triads[i] = *triad
+	}
+
+	return triads, nil
 }
 
 func NewCodesInOctave(codes []Code) (*InOctave, error) {
@@ -64,7 +101,7 @@ func (c collection) Get(codeName string) *Code {
 
 func (c collection) Filter(filter func(code Code) bool) []Code {
 	var filtered []Code
-	//TOD change to concurrent code
+	//TODO change to concurrent code
 	for _, inOctave := range c.allCodes {
 		for _, code := range inOctave.Codes {
 			if filter(code) {
@@ -77,7 +114,7 @@ func (c collection) Filter(filter func(code Code) bool) []Code {
 }
 
 func (c collection) ForEach(do func(code Code)) {
-	//TOD change to concurrent code
+	//TODO change to concurrent code
 	for _, inOctave := range c.allCodes {
 		for _, code := range inOctave.Codes {
 			do(code)

@@ -1,6 +1,7 @@
 package code
 
 import (
+	"github.com/duosonic62/codanalyzer-domains/internal/scale"
 	"strconv"
 	"strings"
 	"testing"
@@ -22,7 +23,7 @@ func TestCollection_ForEach(t *testing.T) {
 		count++
 	})
 
-	if count != 12 {
-		t.Error("Expected: 12 actions but actual: " + strconv.Itoa(12))
+	if count /len(scale.AllNotes()) != len(AllTriadTypes) + 1 {
+		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes) + 1) + " actions but actual: " + strconv.Itoa(count /len(scale.AllNotes())))
 	}
 }

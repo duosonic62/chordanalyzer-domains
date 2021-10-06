@@ -105,6 +105,16 @@ const (
 	Sus4     TriadType = "sus4"
 )
 
+var AllTriadTypes = []TriadType {
+	Major,
+	Minor,
+	Augment,
+	Diminish,
+	MajorB5,
+	Sus2,
+	Sus4,
+}
+
 func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 	switch enum {
 	case Major:

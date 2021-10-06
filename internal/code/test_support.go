@@ -31,6 +31,7 @@ var major7Factory = NewFactory([]scale.Interval{
 
 var major7codes, _ = major7Factory.Build()
 var major7, _ = NewCodesInOctave(major7codes)
-var major7Collection = NewCollectionFactory().Append(major7).Build()
+var factory, _ = NewCollectionFactory()
+var major7Collection = factory.Append(major7).Build()
 
-var collections = NewCollectionFactory().Append(major).Append(minor).Append(major7).Build()
+var collections = factory.Append(major).Append(minor).Append(major7).Build()
