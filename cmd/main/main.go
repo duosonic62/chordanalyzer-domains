@@ -13,7 +13,10 @@ func main() {
 		panic(err)
 	}
 
-	collectionFactory := code.NewCollectionFactory()
+	collectionFactory, err := code.NewCollectionFactory()
+	if err != nil {
+		panic(err)
+	}
 
 	for _, input := range inputs {
 		codes, err := factory.CreateCodes(input)
@@ -34,4 +37,13 @@ func main() {
 			fmt.Println(code.Name())
 		}
 	})
+	analyzer := code.NewAnalyzer(collection)
+
+	target := collection.Get("Cm7b5")
+	if target != nil {
+		analyzedCodes := analyzer.AnalyzeIncludedCodes(*target)
+		for _, analyzedCode := range analyzedCodes {
+			fmt.Println(analyzedCode)
+		}
+	}
 }
