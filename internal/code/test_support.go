@@ -34,4 +34,4 @@ var major7, _ = NewCodesInOctave(major7codes)
 var factory, _ = NewCollectionFactory()
 var major7Collection = factory.Append(major7).Build()
 
-var collections = factory.Append(major).Append(minor).Append(major7).Build()
+var collections = major7Collection

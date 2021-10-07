@@ -12,8 +12,8 @@ func TestCollection_Filter(t *testing.T) {
 		return strings.Contains(code.Name(), "C")
 	})
 
-	if len(actual) !=2 {
-		t.Error("Expected: CM7 and C#M7 but not")
+	if len(actual) !=16 {
+		t.Error("Expected: C* and C#* but not")
 	}
 }
 
