@@ -2,12 +2,7 @@ package code
 
 import "github.com/duosonic62/codanalyzer-domains/internal/scale"
 
-var major7Factory = NewFactory([]scale.Interval{
-	scale.Intervals.R,
-	scale.Intervals.Major3,
-	scale.Intervals.Perfect5,
-	scale.Intervals.Major7,
-})
+var major7Factory = NewCodeFactory(Major, []scale.Interval{scale.Intervals.Major7})
 
 var major7codes, _ = major7Factory.Build()
 var major7, _ = NewCodesInOctave(major7codes)
