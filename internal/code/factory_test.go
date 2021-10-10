@@ -2,66 +2,20 @@ package code
 
 import (
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"strconv"
 	"testing"
 )
 
-func TestFactory_Build_Triad(t *testing.T) {
-	intervals := []scale.Interval{
-		scale.Intervals.R,
-		scale.Intervals.Major3,
-		scale.Intervals.Perfect5,
+func TestFactory_Build(t *testing.T) {
+	factory := NewCodeFactory(Major, []scale.Interval{scale.Intervals.Minor7})
+	codes, err := factory.Build()
+	if err != nil {
+		t.Error("Unexpected error: " + err.Error())
+	}
+	if len(codes) != 12 {
+		t.Error("Expected: 12 codes, but actual: " + strconv.Itoa(len(codes)))
 	}
 
-	factory := NewFactory(intervals)
-	codes, _ := factory.Build()
-	if "C" != codes[0].Name() {
-		t.Error("Expected: C, but actual: " + codes[0].Name())
-	}
-	if "C#" != codes[1].Name() {
-		t.Error("Expected: C#, but actual: " + codes[1].Name())
-	}
-	if "D" != codes[2].Name() {
-		t.Error("Expected: D, but actual: " + codes[2].Name())
-	}
-	if "D#" != codes[3].Name() {
-		t.Error("Expected: D#, but actual: " + codes[3].Name())
-	}
-	if "E" != codes[4].Name() {
-		t.Error("Expected: E, but actual: " + codes[4].Name())
-	}
-	if "F" != codes[5].Name() {
-		t.Error("Expected: F, but actual: " + codes[5].Name())
-	}
-	if "F#" != codes[6].Name() {
-		t.Error("Expected: F#, but actual: " + codes[6].Name())
-	}
-	if "G" != codes[7].Name() {
-		t.Error("Expected: G, but actual: " + codes[7].Name())
-	}
-	if "G#" != codes[8].Name() {
-		t.Error("Expected: G#, but actual: " + codes[8].Name())
-	}
-	if "A" != codes[9].Name() {
-		t.Error("Expected: A, but actual: " + codes[9].Name())
-	}
-	if "A#" != codes[10].Name() {
-		t.Error("Expected: A#, but actual: " + codes[10].Name())
-	}
-	if "B" != codes[11].Name() {
-		t.Error("Expected: B, but actual: " + codes[11].Name())
-	}
-}
-
-func TestFactory_Build_Tension(t *testing.T) {
-	intervals := []scale.Interval{
-		scale.Intervals.R,
-		scale.Intervals.Major3,
-		scale.Intervals.Perfect5,
-		scale.Intervals.Minor7,
-	}
-
-	factory := NewFactory(intervals)
-	codes, _ := factory.Build()
 	if "C7" != codes[0].Name() {
 		t.Error("Expected: C7, but actual: " + codes[0].Name())
 	}
@@ -100,16 +54,24 @@ func TestFactory_Build_Tension(t *testing.T) {
 	}
 }
 
+func TestFactory_BuildError(t *testing.T) {
+	factory := NewCodeFactory(Major, []scale.Interval{})
+	_, err := factory.Build()
+	if err == nil {
+		t.Error("Expected error occurred,  but actual error is null")
+	}
+}
+
 func TestFactory_BuildWithName(t *testing.T) {
-	intervals := []scale.Interval{
-		scale.Intervals.R,
-		scale.Intervals.Minor3,
-		scale.Intervals.Flat5,
-		scale.Intervals.Minor7,
+	factory := NewCodeFactory(Diminish, []scale.Interval{scale.Intervals.Minor7})
+	codes, err := factory.BuildWithName("m7b5")
+	if err != nil {
+		t.Error("Unexpected error: " + err.Error())
+	}
+	if len(codes) != 12 {
+		t.Error("Expected: 12 codes, but actual: " + strconv.Itoa(len(codes)))
 	}
 
-	factory := NewFactory(intervals)
-	codes, _ := factory.BuildWithName("m7b5")
 	if "Cm7b5" != codes[0].Name() {
 		t.Error("Expected: Cm7b5, but actual: " + codes[0].Name())
 	}
@@ -145,5 +107,13 @@ func TestFactory_BuildWithName(t *testing.T) {
 	}
 	if "Bm7b5" != codes[11].Name() {
 		t.Error("Expected: Bm7b5, but actual: " + codes[11].Name())
+	}
+}
+
+func TestFactory_BuildWithNameError(t *testing.T) {
+	factory := NewCodeFactory(Diminish, []scale.Interval{})
+	_, err := factory.BuildWithName("m7b5")
+	if err == nil {
+		t.Error("Expected error occurred,  but actual error is null")
 	}
 }

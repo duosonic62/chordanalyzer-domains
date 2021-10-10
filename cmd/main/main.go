@@ -41,7 +41,7 @@ func main() {
 
 	target := collection.Get("Cm7b5")
 	if target != nil {
-		analyzedCodes := analyzer.AnalyzeIncludedCodes(*target)
+		analyzedCodes := analyzer.AnalyzeIncludedCodes(target)
 		for _, analyzedCode := range analyzedCodes {
 			fmt.Println(analyzedCode)
 		}

@@ -8,12 +8,7 @@ import (
 
 func TestAnalyzer_AnalyzeIncludedCodes(t *testing.T) {
 	analyzer := NewAnalyzer(collections)
-	cM7, _ := NewTensionCode(&scale.Notes.C, []scale.Interval{
-		scale.Intervals.R,
-		scale.Intervals.Major3,
-		scale.Intervals.Perfect5,
-		scale.Intervals.Major7,
-	})
+	cM7, _ := NewTensionCode(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	actual := analyzer.AnalyzeIncludedCodes(cM7)
 	if len(actual) != 3 {
 		t.Error("Expected 3 codes, but actual " + strconv.Itoa(len(actual)))

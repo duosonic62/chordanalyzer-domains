@@ -7,7 +7,7 @@ import (
 )
 
 type Collection interface {
-	Get(codeName string) *Code
+	Get(codeName string) Code
  	Filter(filter func(code Code) bool) []Code
 	ForEach(do func(code Code))
 }
@@ -87,7 +87,7 @@ type collection struct {
 	allCodes []InOctave
 }
 
-func (c collection) Get(codeName string) *Code {
+func (c collection) Get(codeName string) Code {
 	codes := c.Filter(func(code Code) bool {
 		return code.Name() == codeName
 	})
@@ -96,7 +96,7 @@ func (c collection) Get(codeName string) *Code {
 		return nil
 	}
 
-	return &codes[0]
+	return codes[0]
 }
 
 func (c collection) Filter(filter func(code Code) bool) []Code {
