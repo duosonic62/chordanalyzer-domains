@@ -35,3 +35,11 @@ func TestCollection_Get(t *testing.T) {
 		t.Error("")
 	}
 }
+
+func TestCollection_GetNoCodes(t *testing.T) {
+	actual := major7Collection.Get("Cm7")
+	if actual != nil {
+		t.Error("")
+	}
+}
+
