@@ -30,7 +30,7 @@ func TestCollection_ForEach(t *testing.T) {
 
 func TestCollection_Get(t *testing.T) {
 	actual := major7Collection.Get("CM7")
-	major7, _ := NewTensionCodeFrom(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
+	major7, _ := NewTensionCode(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	if actual.Name() != major7.Name() {
 		t.Error("")
 	}
