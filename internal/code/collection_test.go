@@ -12,7 +12,7 @@ func TestCollection_Filter(t *testing.T) {
 		return strings.Contains(code.Name(), "C")
 	})
 
-	if len(actual) !=16 {
+	if len(actual) != 16 {
 		t.Error("Expected: C* and C#* but not")
 	}
 }
@@ -23,7 +23,15 @@ func TestCollection_ForEach(t *testing.T) {
 		count++
 	})
 
-	if count /len(scale.AllNotes()) != len(AllTriadTypes) + 1 {
-		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes) + 1) + " actions but actual: " + strconv.Itoa(count /len(scale.AllNotes())))
+	if count/len(scale.AllNotes()) != len(AllTriadTypes)+1 {
+		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes)+1) + " actions but actual: " + strconv.Itoa(count/len(scale.AllNotes())))
+	}
+}
+
+func TestCollection_Get(t *testing.T) {
+	actual := major7Collection.Get("CM7")
+	major7, _ := NewTensionCodeFrom(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
+	if actual.Name() != major7.Name() {
+		t.Error("")
 	}
 }
