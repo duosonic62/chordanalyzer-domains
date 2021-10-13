@@ -12,7 +12,10 @@ var (
 	RootCmd = &cobra.Command{
 		Use: "code-analyze",
 		Run: func(cmd *cobra.Command, args []string) {
-			cmd.Usage()
+			err := cmd.Usage()
+			if err != nil {
+				Exit(err, 2)
+			}
 		},
 	}
 	Analyzer code.Analyzer
@@ -21,7 +24,11 @@ var (
 func Run()  {
 	err := RootCmd.Execute()
 	if err != nil {
-		fmt.Fprintln(os.Stderr, err)
-		os.Exit(1)
+		Exit(err, 2)
 	}
+}
+
+func Exit(err error, exit int)  {
+	fmt.Fprintln(os.Stderr, err)
+	os.Exit(exit)
 }
