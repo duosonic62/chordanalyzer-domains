@@ -8,8 +8,9 @@ import (
 
 type Collection interface {
 	Get(codeName string) Code
- 	Filter(filter func(code Code) bool) []Code
+ 	Filter(filter func(code Code) bool) Collection
 	ForEach(do func(code Code))
+	ToSlice() []Code
 }
 
 type CollectionFactory struct {
@@ -59,7 +60,7 @@ func buildTriads() ([]InOctave, error) {
 func buildTriad(triadType TriadType) ([]Code, error) {
 	triads := make([]Code, len(scale.AllNotes()))
 	for i, root := range scale.AllNotes() {
-		triad, err :=  NewTriadFrom(&root, triadType)
+		triad, err := NewTriadFrom(&root, triadType)
 		if err != nil {
 			return nil, err
 		}
@@ -92,14 +93,15 @@ func (c collection) Get(codeName string) Code {
 		return code.Name() == codeName
 	})
 
-	if len(codes) == 0 {
-		return nil
-	}
+	var target Code
+	codes.ForEach(func(code Code) {
+		target = code
+	})
 
-	return codes[0]
+	return target
 }
 
-func (c collection) Filter(filter func(code Code) bool) []Code {
+func (c collection) Filter(filter func(code Code) bool) Collection {
 	var filtered []Code
 	//TODO change to concurrent code
 	for _, inOctave := range c.allCodes {
@@ -110,7 +112,7 @@ func (c collection) Filter(filter func(code Code) bool) []Code {
 		}
 	}
 
-	return filtered
+	return stream{codes: filtered}
 }
 
 func (c collection) ForEach(do func(code Code)) {
@@ -120,4 +122,56 @@ func (c collection) ForEach(do func(code Code)) {
 			do(code)
 		}
 	}
+}
+
+func (c collection) ToSlice() []Code {
+	codes := make([]Code, len(c.allCodes) * scale.NoteCount)
+
+	count := 0
+	c.ForEach(func(code Code) {
+		codes[count] = code
+		count++
+	})
+
+	return codes
+}
+
+type stream struct {
+	codes []Code
+}
+
+func (c stream) Get(codeName string) Code {
+	codes := c.Filter(func(code Code) bool {
+		return code.Name() == codeName
+	})
+
+	var target Code
+	codes.ForEach(func(code Code) {
+		target = code
+	})
+
+	return target
+}
+
+func (c stream) Filter(filter func(code Code) bool) Collection {
+	var filtered []Code
+	//TODO change to concurrent code
+	for _, code := range c.codes {
+		if filter(code) {
+			filtered = append(filtered, code)
+		}
+	}
+
+	return stream{codes: filtered}
+}
+
+func (c stream) ForEach(do func(code Code)) {
+	//TODO change to concurrent code
+	for _, code := range c.codes {
+		do(code)
+	}
+}
+
+func (c stream) ToSlice() []Code {
+	return c.codes
 }
