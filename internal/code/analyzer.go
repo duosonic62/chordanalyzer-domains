@@ -2,6 +2,7 @@ package code
 
 type Analyzer interface {
 	AnalyzeIncludedCodes(target Code) []Code
+	AllCodes() Collection
 }
 
 type analyzer struct {
@@ -15,5 +16,9 @@ func NewAnalyzer(collection Collection) Analyzer {
 func (a analyzer) AnalyzeIncludedCodes(target Code) []Code {
 	return a.collection.Filter(func(code Code) bool {
 		return target.Contains(code)
-	})
+	}).ToSlice()
+}
+
+func (a analyzer) AllCodes() Collection {
+	return a.collection
 }
