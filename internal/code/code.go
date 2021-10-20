@@ -10,5 +10,4 @@ type Code interface {
 	Notes() []scale.Note
 	Intervals() []scale.Interval
 	Contains(other Code) bool
-	Info() string
 }

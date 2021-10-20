@@ -30,11 +30,11 @@ func analyzeAction(chord string) {
 	}
 
 	fmt.Println("Analyzed Code")
-	fmt.Println(target.Info())
+	PrintCode(&target)
 
 	fmt.Println(target.Name() + " include...")
 	for _, code := range Analyzer.AnalyzeIncludedCodes(target) {
-		fmt.Println(code.Info())
+		PrintCode(&code)
 	}
 }
 
