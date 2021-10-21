@@ -9,7 +9,8 @@ import (
 
 var (
 	listCmd = &cobra.Command{
-		Use: "List all available codes\n Show only chords whose root note is C",
+		Use: "list",
+		Short: "List all available codes\n Show only chords whose root note is C",
 		Run: runList,
 	}
 )

@@ -8,7 +8,8 @@ import (
 
 var (
 	analyzeCmd = &cobra.Command{
-		Use: "Analyze chord",
+		Use: "analyze",
+		Short: "Analyze chord",
 		Run: runAnalyze,
 		Args: func(cmd *cobra.Command, args []string) error {
 			if len(args) != 1 {
@@ -27,14 +28,15 @@ func analyzeAction(chord string) {
 	target := Analyzer.AllCodes().Get(chord)
 	if target == nil {
 		Exit(errors.New(chord+" is a invalid chord\n Please check valid chords with list command"), 2)
+		return
 	}
 
 	fmt.Println("Analyzed Code")
-	PrintCode(&target)
+	PrintCode(target)
 
 	fmt.Println(target.Name() + " include...")
 	for _, code := range Analyzer.AnalyzeIncludedCodes(target) {
-		PrintCode(&code)
+		PrintCode(code)
 	}
 }
 
