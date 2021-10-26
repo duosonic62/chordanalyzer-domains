@@ -1,15 +1,15 @@
-package code
+package chord
 
 import (
-	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/duosonic62/chordanalyzer-domains/internal/scale"
 	"strconv"
 	"strings"
 	"testing"
 )
 
 func TestCollection_Filter(t *testing.T) {
-	actual := major7Collection.Filter(func(code Code) bool {
-		return strings.Contains(code.Name(), "C")
+	actual := major7Collection.Filter(func(chord Chord) bool {
+		return strings.Contains(chord.Name(), "C")
 	})
 
 	if len(actual.ToSlice()) != 16 {
@@ -19,7 +19,7 @@ func TestCollection_Filter(t *testing.T) {
 
 func TestCollection_ForEach(t *testing.T) {
 	count := 0
-	major7Collection.ForEach(func(code Code) {
+	major7Collection.ForEach(func(chord Chord) {
 		count++
 	})
 
@@ -30,13 +30,13 @@ func TestCollection_ForEach(t *testing.T) {
 
 func TestCollection_Get(t *testing.T) {
 	actual := major7Collection.Get("CM7")
-	major7, _ := NewTensionCode(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
+	major7, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	if actual.Name() != major7.Name() {
 		t.Error("")
 	}
 }
 
-func TestCollection_GetNoCodes(t *testing.T) {
+func TestCollection_GetNoChords(t *testing.T) {
 	actual := major7Collection.Get("Cm7")
 	if actual != nil {
 		t.Error("")

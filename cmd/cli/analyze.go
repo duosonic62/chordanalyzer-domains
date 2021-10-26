@@ -25,18 +25,18 @@ func runAnalyze(cmd *cobra.Command, args []string) {
 }
 
 func analyzeAction(chord string) {
-	target := Analyzer.AllCodes().Get(chord)
+	target := Analyzer.AllChords().Get(chord)
 	if target == nil {
 		Exit(errors.New(chord+" is a invalid chord\n Please check valid chords with list command"), 2)
 		return
 	}
 
-	fmt.Println("Analyzed Code")
-	PrintCode(target)
+	fmt.Println("Analyzed Chord")
+	PrintChord(target)
 
 	fmt.Println(target.Name() + " include...")
-	for _, code := range Analyzer.AnalyzeIncludedCodes(target) {
-		PrintCode(code)
+	for _, chord := range Analyzer.AnalyzeIncludedChords(target) {
+		PrintChord(chord)
 	}
 }
 

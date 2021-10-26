@@ -2,7 +2,7 @@ package cli
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/chordanalyzer-domains/internal/chord"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -10,7 +10,7 @@ import (
 var (
 	// RootCmd defines root command
 	RootCmd = &cobra.Command{
-		Use: "code-analyze",
+		Use: "chord-analyze",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := cmd.Usage()
 			if err != nil {
@@ -18,7 +18,7 @@ var (
 			}
 		},
 	}
-	Analyzer code.Analyzer
+	Analyzer chord.Analyzer
 )
 
 func Run()  {

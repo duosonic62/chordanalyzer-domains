@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "codes": [
+  "chords": [
     {
       "triad": "Major",
       "tension": ["b7"]

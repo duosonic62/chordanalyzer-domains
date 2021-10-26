@@ -1,7 +1,7 @@
-package code
+package chord
 
 import (
-	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/duosonic62/chordanalyzer-domains/internal/scale"
 	"github.com/pkg/errors"
 )
 
@@ -34,7 +34,7 @@ func (t Triad) Intervals() []scale.Interval {
 	return intervals
 }
 
-func (t Triad) Contains(other Code) bool {
+func (t Triad) Contains(other Chord) bool {
 	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue
 	return t.Name() == other.Name()
 }
