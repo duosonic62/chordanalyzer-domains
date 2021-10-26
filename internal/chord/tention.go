@@ -64,9 +64,9 @@ func (t Tension) notesNum() int {
 	return len(t.tensionNotes) + len(t.triad.notes)
 }
 
-func NewTensionCode(root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
+func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
 	if len(tensions) < 1 {
-		return nil, errors.New("tension code must contains over 4 notes")
+		return nil, errors.New("tension chord must contains over 4 notes")
 	}
 
 	var tensionName string
@@ -92,9 +92,9 @@ func NewTensionCode(root *scale.Note, triadType TriadType, tensions []scale.Inte
 	}, nil
 }
 
-func NewTensionCodeWithName(name string, root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
+func NewTensionChordWithName(name string, root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
 	if len(tensions) < 1 {
-		return nil, errors.New("tension code must contains over 4 notes")
+		return nil, errors.New("tension chord must contains over 4 notes")
 	}
 
 	tensionNotes, err := intervalsToNotes(root, tensions)

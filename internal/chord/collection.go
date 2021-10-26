@@ -34,7 +34,7 @@ func (f CollectionFactory) Append(chordsInOctave *InOctave) *CollectionFactory {
 
 func (f CollectionFactory) Build() Collection {
 	return collection{
-		allCodes: f.chords,
+		allChords: f.chords,
 	}
 }
 
@@ -46,7 +46,7 @@ func buildTriads() ([]InOctave, error) {
 			return nil, err
 		}
 
-		triadInOctave, err := NewCodesInOctave(triads)
+		triadInOctave, err := NewChordsInOctave(triads)
 		if err != nil {
 			return nil, err
 		}
@@ -71,21 +71,21 @@ func buildTriad(triadType TriadType) ([]Chord, error) {
 	return triads, nil
 }
 
-func NewCodesInOctave(chords []Chord) (*InOctave, error) {
+func NewChordsInOctave(chords []Chord) (*InOctave, error) {
 	if len(chords) != scale.NoteCount {
 		return nil, errors.New("chords in octave must contain " + strconv.Itoa(scale.NoteCount) + " chords")
 	}
 	return &InOctave{
-		Codes: chords,
+		Chords: chords,
 	}, nil
 }
 
 type InOctave struct {
-	Codes []Chord
+	Chords []Chord
 }
 
 type collection struct {
-	allCodes []InOctave
+	allChords []InOctave
 }
 
 func (c collection) Get(chordName string) Chord {
@@ -104,8 +104,8 @@ func (c collection) Get(chordName string) Chord {
 func (c collection) Filter(filter func(chord Chord) bool) Collection {
 	var filtered []Chord
 	//TODO change to concurrent chord
-	for _, inOctave := range c.allCodes {
-		for _, chord := range inOctave.Codes {
+	for _, inOctave := range c.allChords {
+		for _, chord := range inOctave.Chords {
 			if filter(chord) {
 				filtered = append(filtered, chord)
 			}
@@ -117,15 +117,15 @@ func (c collection) Filter(filter func(chord Chord) bool) Collection {
 
 func (c collection) ForEach(do func(chord Chord)) {
 	//TODO change to concurrent chord
-	for _, inOctave := range c.allCodes {
-		for _, chord := range inOctave.Codes {
+	for _, inOctave := range c.allChords {
+		for _, chord := range inOctave.Chords {
 			do(chord)
 		}
 	}
 }
 
 func (c collection) ToSlice() []Chord {
-	chords := make([]Chord, len(c.allCodes) * scale.NoteCount)
+	chords := make([]Chord, len(c.allChords) * scale.NoteCount)
 
 	count := 0
 	c.ForEach(func(chord Chord) {

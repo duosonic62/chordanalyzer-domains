@@ -7,7 +7,7 @@ import (
 )
 
 func TestFactory_Build(t *testing.T) {
-	factory := NewCodeFactory(Major, []scale.Interval{scale.Intervals.Minor7})
+	factory := NewChordFactory(Major, []scale.Interval{scale.Intervals.Minor7})
 	codes, err := factory.Build()
 	if err != nil {
 		t.Error("Unexpected error: " + err.Error())
@@ -55,7 +55,7 @@ func TestFactory_Build(t *testing.T) {
 }
 
 func TestFactory_BuildError(t *testing.T) {
-	factory := NewCodeFactory(Major, []scale.Interval{})
+	factory := NewChordFactory(Major, []scale.Interval{})
 	_, err := factory.Build()
 	if err == nil {
 		t.Error("Expected error occurred,  but actual error is null")
@@ -63,7 +63,7 @@ func TestFactory_BuildError(t *testing.T) {
 }
 
 func TestFactory_BuildWithName(t *testing.T) {
-	factory := NewCodeFactory(Diminish, []scale.Interval{scale.Intervals.Minor7})
+	factory := NewChordFactory(Diminish, []scale.Interval{scale.Intervals.Minor7})
 	codes, err := factory.BuildWithName("m7b5")
 	if err != nil {
 		t.Error("Unexpected error: " + err.Error())
@@ -111,7 +111,7 @@ func TestFactory_BuildWithName(t *testing.T) {
 }
 
 func TestFactory_BuildWithNameError(t *testing.T) {
-	factory := NewCodeFactory(Diminish, []scale.Interval{})
+	factory := NewChordFactory(Diminish, []scale.Interval{})
 	_, err := factory.BuildWithName("m7b5")
 	if err == nil {
 		t.Error("Expected error occurred,  but actual error is null")

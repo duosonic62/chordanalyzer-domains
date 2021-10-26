@@ -16,7 +16,7 @@ func CreateCodes(codeInput CodeInput) ([]chord.Chord, error) {
 		return nil, errors.Wrap(err, "failed to generate code")
 	}
 
-	factory := chord.NewCodeFactory(triadType, tension)
+	factory := chord.NewChordFactory(triadType, tension)
 	// If the code name exists, specify it and build it.
 	if codeInput.Name != "" {
 		codes, err := factory.BuildWithName(codeInput.Name)

@@ -21,7 +21,7 @@ func BuildAnalyzer() (chord.Analyzer, error) {
 			return nil, err
 		}
 
-		codesInOctave, err := chord.NewCodesInOctave(codes)
+		codesInOctave, err := chord.NewChordsInOctave(codes)
 		if err != nil {
 			return nil, err
 		}
