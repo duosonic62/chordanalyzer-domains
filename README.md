@@ -1,4 +1,4 @@
-# Codanalyzer
+# Chordanalyzer
 コードを分析するアプリのドメインモデル
 
 # コード設定
