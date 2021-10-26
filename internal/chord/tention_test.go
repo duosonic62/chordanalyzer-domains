@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestNewTensionCode(t *testing.T) {
+func TestNewTensionChord(t *testing.T) {
 	actual, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major6})
 	if actual.name != "C6" {
 		t.Error("Expected: C6, but actual: " + actual.name)
@@ -18,7 +18,7 @@ func TestNewTensionCode(t *testing.T) {
 	}
 }
 
-func TestNewTensionCodeFrom(t *testing.T) {
+func TestNewTensionChordFrom(t *testing.T) {
 	actual, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major6})
 	if actual.name != "C6" {
 		t.Error("Expected: C6, but actual: " + actual.name)
@@ -31,7 +31,7 @@ func TestNewTensionCodeFrom(t *testing.T) {
 	}
 }
 
-func TestNewTensionCodeWithNameFrom(t *testing.T) {
+func TestNewTensionChordWithNameFrom(t *testing.T) {
 	actual, _ := NewTensionChordWithName("Cm7b5", &scale.Notes.C, Diminish, []scale.Interval{scale.Intervals.Major7})
 	if actual.name != "Cm7b5" {
 		t.Error("Expected: C6, but actual: " + actual.name)

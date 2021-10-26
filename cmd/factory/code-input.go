@@ -5,28 +5,28 @@ import (
 	"io/ioutil"
 )
 
-type CodeInputCollection struct {
+type ChordInputCollection struct {
 	Version string      `json:"version"`
-	Codes   []CodeInput `json:"codes"`
+	Chords   []ChordInput `json:"chords"`
 }
 
-type CodeInput struct {
+type ChordInput struct {
 	Name    string   `json:"name"`
 	Triad   string   `json:"triad"`
 	Tension []string `json:"tension"`
 }
 
-func ReadCodesFromJson(filePath string) ([]CodeInput, error) {
+func ReadChordsFromJson(filePath string) ([]ChordInput, error) {
 	raw, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil, err
 	}
 
-	var codeInputCollection CodeInputCollection
-	err = json.Unmarshal(raw, &codeInputCollection)
+	var chordInputCollection ChordInputCollection
+	err = json.Unmarshal(raw, &chordInputCollection)
 	if err != nil {
 		return nil, err
 	}
 
-	return codeInputCollection.Codes, nil
+	return chordInputCollection.Chords, nil
 }

@@ -5,7 +5,7 @@ import (
 )
 
 func BuildAnalyzer() (chord.Analyzer, error) {
-	inputs, err := ReadCodesFromJson("codes.json")
+	inputs, err := ReadChordsFromJson("chords.json")
 	if err != nil {
 		return nil, err
 	}
@@ -16,16 +16,16 @@ func BuildAnalyzer() (chord.Analyzer, error) {
 	}
 
 	for _, input := range inputs {
-		codes, err := CreateCodes(input)
+		chords, err := CreateChords(input)
 		if err != nil {
 			return nil, err
 		}
 
-		codesInOctave, err := chord.NewChordsInOctave(codes)
+		chordsInOctave, err := chord.NewChordsInOctave(chords)
 		if err != nil {
 			return nil, err
 		}
-		collectionFactory = collectionFactory.Append(codesInOctave)
+		collectionFactory = collectionFactory.Append(chordsInOctave)
 	}
 
 	collection := collectionFactory.Build()

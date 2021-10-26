@@ -5,14 +5,14 @@
 スキーマ設定
 
 ```yaml
-CodeInputs:
+ChordInputs:
     description: コードの入力値の集合
     type: object
     required: 
     - version
-    - codes
+    - chords
     properties:
-    codes:
+    chords:
       type: array
       description: コード構造の入力の集合
       items:

@@ -36,7 +36,7 @@ func TestCollection_Get(t *testing.T) {
 	}
 }
 
-func TestCollection_GetNoCodes(t *testing.T) {
+func TestCollection_GetNoChords(t *testing.T) {
 	actual := major7Collection.Get("Cm7")
 	if actual != nil {
 		t.Error("")

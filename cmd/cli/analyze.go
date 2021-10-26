@@ -31,12 +31,12 @@ func analyzeAction(chord string) {
 		return
 	}
 
-	fmt.Println("Analyzed Code")
-	PrintCode(target)
+	fmt.Println("Analyzed Chord")
+	PrintChord(target)
 
 	fmt.Println(target.Name() + " include...")
-	for _, code := range Analyzer.AnalyzeIncludedChords(target) {
-		PrintCode(code)
+	for _, chord := range Analyzer.AnalyzeIncludedChords(target) {
+		PrintChord(chord)
 	}
 }
 

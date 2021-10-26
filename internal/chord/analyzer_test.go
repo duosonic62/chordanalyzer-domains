@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-func TestAnalyzer_AnalyzeIncludedCodes(t *testing.T) {
+func TestAnalyzer_AnalyzeIncludedChords(t *testing.T) {
 	analyzer := NewAnalyzer(collections)
 	cM7, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	actual := analyzer.AnalyzeIncludedChords(cM7)

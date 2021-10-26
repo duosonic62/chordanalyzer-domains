@@ -10,7 +10,7 @@ import (
 var (
 	// RootCmd defines root command
 	RootCmd = &cobra.Command{
-		Use: "code-analyze",
+		Use: "chord-analyze",
 		Run: func(cmd *cobra.Command, args []string) {
 			err := cmd.Usage()
 			if err != nil {

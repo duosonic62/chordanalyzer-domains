@@ -14,9 +14,9 @@ func NewAnalyzer(collection Collection) Analyzer {
 }
 
 func (a analyzer) AnalyzeIncludedChords(target Chord) []Chord {
-	return a.collection.Filter(func(code Chord) bool {
+	return a.collection.Filter(func(chord Chord) bool {
 		// 自分自身は省く
-		return target.Contains(code) && target.Name() != code.Name()
+		return target.Contains(chord) && target.Name() != chord.Name()
 	}).ToSlice()
 }
 

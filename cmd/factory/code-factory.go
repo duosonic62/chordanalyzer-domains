@@ -6,31 +6,31 @@ import (
 	"github.com/pkg/errors"
 )
 
-func CreateCodes(codeInput CodeInput) ([]chord.Chord, error) {
-	tension, err := stringsToIntervals(codeInput.Tension)
+func CreateChords(chordInput ChordInput) ([]chord.Chord, error) {
+	tension, err := stringsToIntervals(chordInput.Tension)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to generate code")
+		return nil, errors.Wrap(err, "failed to generate chord")
 	}
-	triadType, err := stringsToTriad(codeInput.Triad)
+	triadType, err := stringsToTriad(chordInput.Triad)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to generate code")
+		return nil, errors.Wrap(err, "failed to generate chord")
 	}
 
 	factory := chord.NewChordFactory(triadType, tension)
-	// If the code name exists, specify it and build it.
-	if codeInput.Name != "" {
-		codes, err := factory.BuildWithName(codeInput.Name)
+	// If the chord name exists, specify it and build it.
+	if chordInput.Name != "" {
+		chords, err := factory.BuildWithName(chordInput.Name)
 		if err != nil {
-			return nil, errors.Wrap(err, "failed to generate code")
+			return nil, errors.Wrap(err, "failed to generate chord")
 		}
-		return codes, nil
+		return chords, nil
 	}
 
-	codes, err := factory.Build()
+	chords, err := factory.Build()
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to generate code")
+		return nil, errors.Wrap(err, "failed to generate chord")
 	}
-	return codes, nil
+	return chords, nil
 }
 
 func stringsToIntervals(rawIntervals []string) ([]scale.Interval, error) {

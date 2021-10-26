@@ -17,7 +17,7 @@ func NewChordFactory(triad TriadType, tension []scale.Interval) *Factory {
 	}
 }
 
-//Build is create code instances slice
+//Build is create chord instances slice
 func (f Factory) Build() ([]Chord, error) {
 	if len(f.tension) == 0 {
 		return nil, errors.New("failed to build chords, there are no intervals")
