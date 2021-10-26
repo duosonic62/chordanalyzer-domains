@@ -2,8 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/internal/chord"
-	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/duosonic62/chordanalyzer-domains/internal/chord"
+	"github.com/duosonic62/chordanalyzer-domains/internal/scale"
 	"github.com/spf13/cobra"
 )
 

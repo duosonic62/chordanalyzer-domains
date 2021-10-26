@@ -1,6 +1,6 @@
 package chord
 
-import "github.com/duosonic62/codanalyzer-domains/internal/scale"
+import "github.com/duosonic62/chordanalyzer-domains/internal/scale"
 
 var major7Factory = NewChordFactory(Major, []scale.Interval{scale.Intervals.Major7})
 

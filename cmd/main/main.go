@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/cmd/cli"
-	"github.com/duosonic62/codanalyzer-domains/cmd/factory"
+	"github.com/duosonic62/chordanalyzer-domains/cmd/cli"
+	"github.com/duosonic62/chordanalyzer-domains/cmd/factory"
 	"os"
 )
 

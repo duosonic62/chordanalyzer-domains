@@ -2,7 +2,7 @@ package chord
 
 import (
 	"errors"
-	"github.com/duosonic62/codanalyzer-domains/internal/scale"
+	"github.com/duosonic62/chordanalyzer-domains/internal/scale"
 	"strconv"
 )
 

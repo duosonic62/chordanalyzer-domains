@@ -1,7 +1,7 @@
 package factory
 
 import (
-	"github.com/duosonic62/codanalyzer-domains/internal/chord"
+	"github.com/duosonic62/chordanalyzer-domains/internal/chord"
 )
 
 func BuildAnalyzer() (chord.Analyzer, error) {

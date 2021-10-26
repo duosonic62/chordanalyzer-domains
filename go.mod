@@ -1,4 +1,4 @@
-module github.com/duosonic62/codanalyzer-domains
+module github.com/duosonic62/chordanalyzer-domains
 
 go 1.13
 
