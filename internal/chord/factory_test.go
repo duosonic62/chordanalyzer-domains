@@ -13,7 +13,7 @@ func TestFactory_Build(t *testing.T) {
 		t.Error("Unexpected error: " + err.Error())
 	}
 	if len(codes) != 12 {
-		t.Error("Expected: 12 codes, but actual: " + strconv.Itoa(len(codes)))
+		t.Error("Expected: 12 chords, but actual: " + strconv.Itoa(len(codes)))
 	}
 
 	if "C7" != codes[0].Name() {
@@ -69,7 +69,7 @@ func TestFactory_BuildWithName(t *testing.T) {
 		t.Error("Unexpected error: " + err.Error())
 	}
 	if len(codes) != 12 {
-		t.Error("Expected: 12 codes, but actual: " + strconv.Itoa(len(codes)))
+		t.Error("Expected: 12 chords, but actual: " + strconv.Itoa(len(codes)))
 	}
 
 	if "Cm7b5" != codes[0].Name() {

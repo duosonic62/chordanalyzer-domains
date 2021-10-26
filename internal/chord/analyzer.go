@@ -1,8 +1,8 @@
 package chord
 
 type Analyzer interface {
-	AnalyzeIncludedCodes(target Chord) []Chord
-	AllCodes() Collection
+	AnalyzeIncludedChords(target Chord) []Chord
+	AllChords() Collection
 }
 
 type analyzer struct {
@@ -13,13 +13,13 @@ func NewAnalyzer(collection Collection) Analyzer {
 	return analyzer{collection: collection}
 }
 
-func (a analyzer) AnalyzeIncludedCodes(target Chord) []Chord {
+func (a analyzer) AnalyzeIncludedChords(target Chord) []Chord {
 	return a.collection.Filter(func(code Chord) bool {
 		// 自分自身は省く
 		return target.Contains(code) && target.Name() != code.Name()
 	}).ToSlice()
 }
 
-func (a analyzer) AllCodes() Collection {
+func (a analyzer) AllChords() Collection {
 	return a.collection
 }

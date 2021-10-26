@@ -9,9 +9,9 @@ import (
 func TestAnalyzer_AnalyzeIncludedCodes(t *testing.T) {
 	analyzer := NewAnalyzer(collections)
 	cM7, _ := NewTensionCode(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
-	actual := analyzer.AnalyzeIncludedCodes(cM7)
+	actual := analyzer.AnalyzeIncludedChords(cM7)
 	if len(actual) != 2 {
-		t.Error("Expected 2 codes, but actual " + strconv.Itoa(len(actual)))
+		t.Error("Expected 2 chords, but actual " + strconv.Itoa(len(actual)))
 	}
 
 	if actual[0].Name() != "C" && actual[1].Name() != "C" && actual[2].Name() != "C" {

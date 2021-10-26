@@ -20,27 +20,27 @@ func NewCodeFactory(triad TriadType, tension []scale.Interval) *Factory {
 //Build is create code instances slice
 func (f Factory) Build() ([]Chord, error) {
 	if len(f.tension) == 0 {
-		return nil, errors.New("failed to build codes, there are no intervals")
+		return nil, errors.New("failed to build chords, there are no intervals")
 	}
 
 	tensions, err := f.createTensionCode()
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
+		return nil, errors.Wrap(err, "failed to build chords, there are incorrect intervals")
 	}
 	return tensions, nil
 }
 
 //BuildWithName is create tension code with name
 //Use this function to generate code whose name is difficult to guess. (e.g. Cm7b5 and Cdim7)
-//For triad codes, the name will be ignored.
+//For triad chords, the name will be ignored.
 func (f Factory) BuildWithName(name string) ([]Chord, error) {
 	if len(f.tension) == 0 {
-		return nil, errors.New("failed to build codes, there are no intervals")
+		return nil, errors.New("failed to build chords, there are no intervals")
 	}
 
 	tensions, err := f.createTensionWithName(name)
 	if err != nil {
-		return nil, errors.Wrap(err, "failed to build codes, there are incorrect intervals")
+		return nil, errors.Wrap(err, "failed to build chords, there are incorrect intervals")
 	}
 	return tensions, nil
 }

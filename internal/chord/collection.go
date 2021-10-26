@@ -7,34 +7,34 @@ import (
 )
 
 type Collection interface {
-	Get(codeName string) Chord
- 	Filter(filter func(code Chord) bool) Collection
-	ForEach(do func(code Chord))
+	Get(chordName string) Chord
+ 	Filter(filter func(chord Chord) bool) Collection
+	ForEach(do func(chord Chord))
 	ToSlice() []Chord
 }
 
 type CollectionFactory struct {
-	codes []InOctave
+	chords []InOctave
 }
 
 func NewCollectionFactory() (*CollectionFactory, error) {
-	codes, err := buildTriads()
+	chords, err := buildTriads()
 	if err != nil {
 		return nil, err
 	}
 	return &CollectionFactory{
-		codes: codes,
+		chords: chords,
 	}, nil
 }
 
-func (f CollectionFactory) Append(codesInOctave *InOctave) *CollectionFactory {
-	f.codes = append(f.codes, *codesInOctave)
+func (f CollectionFactory) Append(chordsInOctave *InOctave) *CollectionFactory {
+	f.chords = append(f.chords, *chordsInOctave)
 	return &f
 }
 
 func (f CollectionFactory) Build() Collection {
 	return collection{
-		allCodes: f.codes,
+		allCodes: f.chords,
 	}
 }
 
@@ -71,12 +71,12 @@ func buildTriad(triadType TriadType) ([]Chord, error) {
 	return triads, nil
 }
 
-func NewCodesInOctave(codes []Chord) (*InOctave, error) {
-	if len(codes) != scale.NoteCount {
-		return nil, errors.New("codes in octave must contain " + strconv.Itoa(scale.NoteCount) + " codes")
+func NewCodesInOctave(chords []Chord) (*InOctave, error) {
+	if len(chords) != scale.NoteCount {
+		return nil, errors.New("chords in octave must contain " + strconv.Itoa(scale.NoteCount) + " chords")
 	}
 	return &InOctave{
-		Codes: codes,
+		Codes: chords,
 	}, nil
 }
 
@@ -88,90 +88,90 @@ type collection struct {
 	allCodes []InOctave
 }
 
-func (c collection) Get(codeName string) Chord {
-	codes := c.Filter(func(code Chord) bool {
-		return code.Name() == codeName
+func (c collection) Get(chordName string) Chord {
+	chords := c.Filter(func(chord Chord) bool {
+		return chord.Name() == chordName
 	})
 
 	var target Chord
-	codes.ForEach(func(code Chord) {
-		target = code
+	chords.ForEach(func(chord Chord) {
+		target = chord
 	})
 
 	return target
 }
 
-func (c collection) Filter(filter func(code Chord) bool) Collection {
+func (c collection) Filter(filter func(chord Chord) bool) Collection {
 	var filtered []Chord
-	//TODO change to concurrent code
+	//TODO change to concurrent chord
 	for _, inOctave := range c.allCodes {
-		for _, code := range inOctave.Codes {
-			if filter(code) {
-				filtered = append(filtered, code)
+		for _, chord := range inOctave.Codes {
+			if filter(chord) {
+				filtered = append(filtered, chord)
 			}
 		}
 	}
 
-	return stream{codes: filtered}
+	return stream{chords: filtered}
 }
 
-func (c collection) ForEach(do func(code Chord)) {
-	//TODO change to concurrent code
+func (c collection) ForEach(do func(chord Chord)) {
+	//TODO change to concurrent chord
 	for _, inOctave := range c.allCodes {
-		for _, code := range inOctave.Codes {
-			do(code)
+		for _, chord := range inOctave.Codes {
+			do(chord)
 		}
 	}
 }
 
 func (c collection) ToSlice() []Chord {
-	codes := make([]Chord, len(c.allCodes) * scale.NoteCount)
+	chords := make([]Chord, len(c.allCodes) * scale.NoteCount)
 
 	count := 0
-	c.ForEach(func(code Chord) {
-		codes[count] = code
+	c.ForEach(func(chord Chord) {
+		chords[count] = chord
 		count++
 	})
 
-	return codes
+	return chords
 }
 
 type stream struct {
-	codes []Chord
+	chords []Chord
 }
 
-func (c stream) Get(codeName string) Chord {
-	codes := c.Filter(func(code Chord) bool {
-		return code.Name() == codeName
+func (c stream) Get(chordName string) Chord {
+	chords := c.Filter(func(chord Chord) bool {
+		return chord.Name() == chordName
 	})
 
 	var target Chord
-	codes.ForEach(func(code Chord) {
-		target = code
+	chords.ForEach(func(chord Chord) {
+		target = chord
 	})
 
 	return target
 }
 
-func (c stream) Filter(filter func(code Chord) bool) Collection {
+func (c stream) Filter(filter func(chord Chord) bool) Collection {
 	var filtered []Chord
-	//TODO change to concurrent code
-	for _, code := range c.codes {
-		if filter(code) {
-			filtered = append(filtered, code)
+	//TODO change to concurrent chord
+	for _, chord := range c.chords {
+		if filter(chord) {
+			filtered = append(filtered, chord)
 		}
 	}
 
-	return stream{codes: filtered}
+	return stream{chords: filtered}
 }
 
-func (c stream) ForEach(do func(code Chord)) {
-	//TODO change to concurrent code
-	for _, code := range c.codes {
-		do(code)
+func (c stream) ForEach(do func(chord Chord)) {
+	//TODO change to concurrent chord
+	for _, chord := range c.chords {
+		do(chord)
 	}
 }
 
 func (c stream) ToSlice() []Chord {
-	return c.codes
+	return c.chords
 }
