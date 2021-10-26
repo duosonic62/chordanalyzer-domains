@@ -1,4 +1,4 @@
-package code
+package chord
 
 type Analyzer interface {
 	AnalyzeIncludedCodes(target Code) []Code

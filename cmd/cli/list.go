@@ -2,7 +2,7 @@ package cli
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"
 	"github.com/spf13/cobra"
 )
@@ -20,9 +20,9 @@ func runList(cmd *cobra.Command, args []string) {
 }
 
 func listAction() {
-	Analyzer.AllCodes().Filter(func(code code.Code) bool {
+	Analyzer.AllCodes().Filter(func(code chord.Code) bool {
 		return code.Root().Equals(&scale.Notes.C)
-	}).ForEach(func(code code.Code) {
+	}).ForEach(func(code chord.Code) {
 		fmt.Println(code.Name())
 	})
 }

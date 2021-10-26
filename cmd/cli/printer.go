@@ -2,10 +2,10 @@ package cli
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 )
 
-func PrintCode(code code.Code)  {
+func PrintCode(code chord.Code)  {
 	fmt.Println(code.Name())
 	fmt.Print("Notes     | ")
 	for _, note := range code.Notes() {

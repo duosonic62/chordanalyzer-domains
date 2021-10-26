@@ -1,4 +1,4 @@
-package code
+package chord
 
 import (
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"

@@ -2,7 +2,7 @@ package cli
 
 import (
 	"fmt"
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -18,7 +18,7 @@ var (
 			}
 		},
 	}
-	Analyzer code.Analyzer
+	Analyzer chord.Analyzer
 )
 
 func Run()  {

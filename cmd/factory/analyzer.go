@@ -1,16 +1,16 @@
 package factory
 
 import (
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 )
 
-func BuildAnalyzer() (code.Analyzer, error) {
+func BuildAnalyzer() (chord.Analyzer, error) {
 	inputs, err := ReadCodesFromJson("codes.json")
 	if err != nil {
 		return nil, err
 	}
 
-	collectionFactory, err := code.NewCollectionFactory()
+	collectionFactory, err := chord.NewCollectionFactory()
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +21,7 @@ func BuildAnalyzer() (code.Analyzer, error) {
 			return nil, err
 		}
 
-		codesInOctave, err := code.NewCodesInOctave(codes)
+		codesInOctave, err := chord.NewCodesInOctave(codes)
 		if err != nil {
 			return nil, err
 		}
@@ -29,7 +29,7 @@ func BuildAnalyzer() (code.Analyzer, error) {
 	}
 
 	collection := collectionFactory.Build()
-	analyzer := code.NewAnalyzer(collection)
+	analyzer := chord.NewAnalyzer(collection)
 
 	return analyzer, nil
 }

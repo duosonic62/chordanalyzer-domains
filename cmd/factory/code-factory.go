@@ -1,12 +1,12 @@
 package factory
 
 import (
-	"github.com/duosonic62/codanalyzer-domains/internal/code"
+	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"
 	"github.com/pkg/errors"
 )
 
-func CreateCodes(codeInput CodeInput) ([]code.Code, error) {
+func CreateCodes(codeInput CodeInput) ([]chord.Code, error) {
 	tension, err := stringsToIntervals(codeInput.Tension)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to generate code")
@@ -16,7 +16,7 @@ func CreateCodes(codeInput CodeInput) ([]code.Code, error) {
 		return nil, errors.Wrap(err, "failed to generate code")
 	}
 
-	factory := code.NewCodeFactory(triadType, tension)
+	factory := chord.NewCodeFactory(triadType, tension)
 	// If the code name exists, specify it and build it.
 	if codeInput.Name != "" {
 		codes, err := factory.BuildWithName(codeInput.Name)
@@ -45,22 +45,22 @@ func stringsToIntervals(rawIntervals []string) ([]scale.Interval, error) {
 	return intervals, nil
 }
 
-func stringsToTriad(rawTriad string) (code.TriadType, error) {
+func stringsToTriad(rawTriad string) (chord.TriadType, error) {
 	switch rawTriad {
 	case "Major":
-		return code.Major, nil
+		return chord.Major, nil
 	case "Minor":
-		return code.Minor, nil
+		return chord.Minor, nil
 	case "Augment":
-		return code.Augment, nil
+		return chord.Augment, nil
 	case "Diminish":
-		return code.Diminish, nil
+		return chord.Diminish, nil
 	case "MajorB5":
-		return code.MajorB5, nil
+		return chord.MajorB5, nil
 	case "Sus2":
-		return code.Sus2, nil
+		return chord.Sus2, nil
 	case "Sus4":
-		return code.Sus4, nil
+		return chord.Sus4, nil
 	}
 
 	return "", errors.New(rawTriad + " is not a valid triad" )
