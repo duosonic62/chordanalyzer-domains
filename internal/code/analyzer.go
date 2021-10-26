@@ -15,7 +15,8 @@ func NewAnalyzer(collection Collection) Analyzer {
 
 func (a analyzer) AnalyzeIncludedCodes(target Code) []Code {
 	return a.collection.Filter(func(code Code) bool {
-		return target.Contains(code)
+		// 自分自身は省く
+		return target.Contains(code) && target.Name() != code.Name()
 	}).ToSlice()
 }
 
