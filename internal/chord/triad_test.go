@@ -6,7 +6,7 @@ import (
 )
 
 func TestNewTriad(t *testing.T) {
-	// Major Code
+	// Major Chord
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
 	if actual.name != "C" {
 		t.Error("Expected: C, but actual: " + actual.name)
@@ -44,7 +44,7 @@ func TestNewTriad(t *testing.T) {
 }
 
 func TestNewTriadFrom(t *testing.T) {
-	// Major Code
+	// Major Chord
 	actual, _ := NewTriadFrom(&scale.Notes.C, Major)
 	if actual.name != "C" {
 		t.Error("Expected: C, but actual: " + actual.name)

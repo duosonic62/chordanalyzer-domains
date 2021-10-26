@@ -34,7 +34,7 @@ func (t Triad) Intervals() []scale.Interval {
 	return intervals
 }
 
-func (t Triad) Contains(other Code) bool {
+func (t Triad) Contains(other Chord) bool {
 	// トライアドが別のコードを含むことはないので、名前が一致した時のみtrue
 	return t.Name() == other.Name()
 }

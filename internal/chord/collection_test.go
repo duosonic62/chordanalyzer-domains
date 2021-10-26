@@ -8,7 +8,7 @@ import (
 )
 
 func TestCollection_Filter(t *testing.T) {
-	actual := major7Collection.Filter(func(code Code) bool {
+	actual := major7Collection.Filter(func(code Chord) bool {
 		return strings.Contains(code.Name(), "C")
 	})
 
@@ -19,7 +19,7 @@ func TestCollection_Filter(t *testing.T) {
 
 func TestCollection_ForEach(t *testing.T) {
 	count := 0
-	major7Collection.ForEach(func(code Code) {
+	major7Collection.ForEach(func(code Chord) {
 		count++
 	})
 

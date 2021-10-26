@@ -6,7 +6,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-func CreateCodes(codeInput CodeInput) ([]chord.Code, error) {
+func CreateCodes(codeInput CodeInput) ([]chord.Chord, error) {
 	tension, err := stringsToIntervals(codeInput.Tension)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to generate code")

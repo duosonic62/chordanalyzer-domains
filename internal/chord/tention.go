@@ -34,7 +34,7 @@ func (t Tension) Intervals() []scale.Interval {
 	return intervals
 }
 
-func (t Tension) Contains(other Code) bool {
+func (t Tension) Contains(other Chord) bool {
 	// otherの方がノート数が多ければfalse
 	if len(other.Notes()) > len(t.Notes()) {
 		return false

@@ -5,7 +5,7 @@ import (
 	"github.com/duosonic62/codanalyzer-domains/internal/chord"
 )
 
-func PrintCode(code chord.Code)  {
+func PrintCode(code chord.Chord)  {
 	fmt.Println(code.Name())
 	fmt.Print("Notes     | ")
 	for _, note := range code.Notes() {

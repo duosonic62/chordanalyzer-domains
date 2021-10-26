@@ -18,7 +18,7 @@ func NewCodeFactory(triad TriadType, tension []scale.Interval) *Factory {
 }
 
 //Build is create code instances slice
-func (f Factory) Build() ([]Code, error) {
+func (f Factory) Build() ([]Chord, error) {
 	if len(f.tension) == 0 {
 		return nil, errors.New("failed to build codes, there are no intervals")
 	}
@@ -33,7 +33,7 @@ func (f Factory) Build() ([]Code, error) {
 //BuildWithName is create tension code with name
 //Use this function to generate code whose name is difficult to guess. (e.g. Cm7b5 and Cdim7)
 //For triad codes, the name will be ignored.
-func (f Factory) BuildWithName(name string) ([]Code, error) {
+func (f Factory) BuildWithName(name string) ([]Chord, error) {
 	if len(f.tension) == 0 {
 		return nil, errors.New("failed to build codes, there are no intervals")
 	}
@@ -45,9 +45,9 @@ func (f Factory) BuildWithName(name string) ([]Code, error) {
 	return tensions, nil
 }
 
-func (f Factory) createTensionCode() ([]Code, error) {
+func (f Factory) createTensionCode() ([]Chord, error) {
 	allNotes := scale.AllNotes()
-	tensions := make([]Code, len(allNotes))
+	tensions := make([]Chord, len(allNotes))
 	for i, root := range scale.AllNotes() {
 		tension, err := NewTensionCode(&root, f.triad, f.tension)
 		if err != nil {
@@ -59,9 +59,9 @@ func (f Factory) createTensionCode() ([]Code, error) {
 	return tensions, nil
 }
 
-func (f Factory) createTensionWithName(name string) ([]Code, error) {
+func (f Factory) createTensionWithName(name string) ([]Chord, error) {
 	allNotes := scale.AllNotes()
-	tensions := make([]Code, len(allNotes))
+	tensions := make([]Chord, len(allNotes))
 	for i, root := range scale.AllNotes() {
 		tension, err := NewTensionCodeWithName(root.String() + name, &root, f.triad, f.tension)
 		if err != nil {

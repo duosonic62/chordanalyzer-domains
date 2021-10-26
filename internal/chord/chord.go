@@ -4,10 +4,10 @@ import (
 	"github.com/duosonic62/codanalyzer-domains/internal/scale"
 )
 
-type Code interface {
+type Chord interface {
 	Name() string
 	Root() *scale.Note
 	Notes() []scale.Note
 	Intervals() []scale.Interval
-	Contains(other Code) bool
+	Contains(other Chord) bool
 }

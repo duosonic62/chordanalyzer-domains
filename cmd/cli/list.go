@@ -20,9 +20,9 @@ func runList(cmd *cobra.Command, args []string) {
 }
 
 func listAction() {
-	Analyzer.AllCodes().Filter(func(code chord.Code) bool {
+	Analyzer.AllCodes().Filter(func(code chord.Chord) bool {
 		return code.Root().Equals(&scale.Notes.C)
-	}).ForEach(func(code chord.Code) {
+	}).ForEach(func(code chord.Chord) {
 		fmt.Println(code.Name())
 	})
 }
