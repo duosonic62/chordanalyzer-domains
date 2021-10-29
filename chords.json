@@ -10,6 +10,44 @@
       "tension": ["b7"]
     },
     {
+      "triad": "Major",
+      "tension": ["b7", "b9"]
+    },
+    {
+      "triad": "Minor",
+      "tension": ["b7", "b9"]
+    },
+    {
+      "name": "9",
+      "triad": "Major",
+      "tension": ["b7", "9"]
+    },
+    {
+      "name": "m9",
+      "triad": "Minor",
+      "tension": ["b7", "9"]
+    },
+    {
+      "triad": "Major",
+      "tension": ["b7", "#9"]
+    },
+    {
+      "triad": "Minor",
+      "tension": ["b7", "#9"]
+    },
+    {
+      "triad": "Major",
+      "tension": ["b7", "b13"]
+    },
+    {
+      "triad": "Major",
+      "tension": ["b7", "13"]
+    },
+    {
+      "triad": "Major",
+      "tension": ["b7", "9", "13"]
+    },
+    {
       "name": "m7b5",
       "triad": "Diminish",
       "tension": ["b7"]
