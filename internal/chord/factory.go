@@ -63,7 +63,7 @@ func (f Factory) createTensionWithName(name string) ([]Chord, error) {
 	allNotes := scale.AllNotes()
 	tensions := make([]Chord, len(allNotes))
 	for i, root := range scale.AllNotes() {
-		tension, err := NewTensionChordWithName(root.String() + name, &root, f.triad, f.tension)
+		tension, err := NewTensionChordWithName(name, &root, f.triad, f.tension)
 		if err != nil {
 			return nil, err
 		}

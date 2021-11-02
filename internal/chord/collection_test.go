@@ -32,7 +32,7 @@ func TestCollection_Get(t *testing.T) {
 	actual := major7Collection.Get("CM7")
 	major7, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	if actual.Name() != major7.Name() {
-		t.Error("")
+		t.Error("Expected: " + major7.Name() + " , but actual: " + actual.Name())
 	}
 }
 

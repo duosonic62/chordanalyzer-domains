@@ -8,12 +8,11 @@ type Name interface {
 }
 
 type name struct {
-	root *scale.Note
-	tension string
+	value string
 }
 
 func (n name) Get() string {
-	return n.root.String() + n.tension
+	return n.value
 }
 
 func (n name) Equals(name string) bool {
@@ -27,14 +26,12 @@ func NewName(root *scale.Note, tensions []scale.Interval) Name {
 	}
 
 	return name{
-		root:    root,
-		tension: tensionName,
+		value: root.String() + tensionName,
 	}
 }
 
 func NewNameWithTensionName(root *scale.Note, tension string) Name {
 	return name{
-		root:    root,
-		tension: tension,
+		root.String() + tension,
 	}
 }

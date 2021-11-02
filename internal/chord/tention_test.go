@@ -32,9 +32,9 @@ func TestNewTensionChordFrom(t *testing.T) {
 }
 
 func TestNewTensionChordWithNameFrom(t *testing.T) {
-	actual, _ := NewTensionChordWithName("Cm7b5", &scale.Notes.C, Diminish, []scale.Interval{scale.Intervals.Major7})
+	actual, _ := NewTensionChordWithName("m7b5", &scale.Notes.C, Diminish, []scale.Interval{scale.Intervals.Major7})
 	if actual.Name() != "Cm7b5" {
-		t.Error("Expected: C6, but actual: " + actual.Name())
+		t.Error("Expected: Cm7b5, but actual: " + actual.Name())
 	}
 
 	// under 3 notes
