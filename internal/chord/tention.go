@@ -6,14 +6,14 @@ import (
 )
 
 type Tension struct {
-	name             string
+	name             Name
 	triad            *Triad
 	tensionNotes     []scale.Note
 	tensionIntervals []scale.Interval
 }
 
 func (t Tension) Name() string {
-	return t.name
+	return t.name.Get()
 }
 
 func (t Tension) Root() *scale.Note {
@@ -85,7 +85,7 @@ func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Int
 	}
 
 	return &Tension{
-		name:         triad.name + tensionName,
+		name:         NewName(root, tensions),
 		triad:        triad,
 		tensionNotes: tensionNotes,
 		tensionIntervals: tensions,
@@ -108,7 +108,7 @@ func NewTensionChordWithName(name string, root *scale.Note, triadType TriadType,
 	}
 
 	return &Tension{
-		name:         name,
+		name:         NewNameWithTensionName(root, name),
 		triad:        triad,
 		tensionNotes: tensionNotes,
 		tensionIntervals: tensions,
