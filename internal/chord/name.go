@@ -29,11 +29,15 @@ func (n name) Equals(name string) bool {
 	}
 	rootName := codeName[0]
 	tensionName := codeName[1]
+
 	// root0] を scale.Noteに変換
+	root, err := scale.FromString(rootName)
+	if err != nil {
+		return false
+	}
 
 	// root[0] と n.root, n.tension と tensionを比較
-	// return root.Equivalent(n.root) && tensionName == n.tension
-	return name == n.Get()
+	return root.Equivalent(&n.root) && tensionName == n.tension
 }
 
 func NewName(root *scale.Note, tensions []scale.Interval) Name {

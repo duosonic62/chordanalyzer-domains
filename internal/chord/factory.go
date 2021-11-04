@@ -46,9 +46,9 @@ func (f Factory) BuildWithName(name string) ([]Chord, error) {
 }
 
 func (f Factory) createTensionChord() ([]Chord, error) {
-	allNotes := scale.AllNotes()
+	allNotes := scale.AllNotesInOctave()
 	tensions := make([]Chord, len(allNotes))
-	for i, root := range scale.AllNotes() {
+	for i, root := range scale.AllNotesInOctave() {
 		tension, err := NewTensionChord(&root, f.triad, f.tension)
 		if err != nil {
 			return nil, err
@@ -60,9 +60,9 @@ func (f Factory) createTensionChord() ([]Chord, error) {
 }
 
 func (f Factory) createTensionWithName(name string) ([]Chord, error) {
-	allNotes := scale.AllNotes()
+	allNotes := scale.AllNotesInOctave()
 	tensions := make([]Chord, len(allNotes))
-	for i, root := range scale.AllNotes() {
+	for i, root := range scale.AllNotesInOctave() {
 		tension, err := NewTensionChordWithName(name, &root, f.triad, f.tension)
 		if err != nil {
 			return nil, err

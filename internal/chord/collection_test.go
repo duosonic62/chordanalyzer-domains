@@ -23,8 +23,8 @@ func TestCollection_ForEach(t *testing.T) {
 		count++
 	})
 
-	if count/len(scale.AllNotes()) != len(AllTriadTypes)+1 {
-		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes)+1) + " actions but actual: " + strconv.Itoa(count/len(scale.AllNotes())))
+	if count/len(scale.AllNotesInOctave()) != len(AllTriadTypes)+1 {
+		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes)+1) + " actions but actual: " + strconv.Itoa(count/len(scale.AllNotesInOctave())))
 	}
 }
 

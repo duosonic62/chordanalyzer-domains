@@ -58,8 +58,8 @@ func buildTriads() ([]InOctave, error) {
 }
 
 func buildTriad(triadType TriadType) ([]Chord, error) {
-	triads := make([]Chord, len(scale.AllNotes()))
-	for i, root := range scale.AllNotes() {
+	triads := make([]Chord, len(scale.AllNotesInOctave()))
+	for i, root := range scale.AllNotesInOctave() {
 		triad, err := NewTriadFrom(&root, triadType)
 		if err != nil {
 			return nil, err
