@@ -24,11 +24,11 @@ func (n name) Get() string {
 
 func (n name) Equals(name string) bool {
 	codeName := codeNameRegex.FindStringSubmatch(name)
-	if len(codeName) != 2 {
+	if len(codeName) != 3 {
 		return false
 	}
-	rootName := codeName[0]
-	tensionName := codeName[1]
+	rootName := codeName[1]
+	tensionName := codeName[2]
 
 	// root0] を scale.Noteに変換
 	root, err := scale.FromString(rootName)
