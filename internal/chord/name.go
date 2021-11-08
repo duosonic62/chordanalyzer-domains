@@ -13,13 +13,12 @@ type Name interface {
 var codeNameRegex = regexp.MustCompile("([A-G][b#]?)(.*)")
 
 type name struct {
-	root    scale.Note
-	tension string
-	value   string
+	root  scale.Note
+	value string
 }
 
 func (n name) Get() string {
-	return n.root.String() + n.tension
+	return n.root.String() + n.value
 }
 
 func (n name) Equals(name string) bool {
@@ -36,11 +35,11 @@ func (n name) Equals(name string) bool {
 		return false
 	}
 
-	// root[0] と n.root, n.tension と tensionを比較
-	return root.Equivalent(&n.root) && tensionName == n.tension
+	// root[0] と n.root, n.value と tensionを比較
+	return root.Equivalent(&n.root) && tensionName == n.value
 }
 
-func NewName(root *scale.Note, tensions []scale.Interval) Name {
+func NewName(root *scale.Note, triad TriadType, tensions []scale.Interval) Name {
 	var tensionName string
 	for _, interval := range tensions {
 		tensionName = tensionName + interval.String()
@@ -48,15 +47,13 @@ func NewName(root *scale.Note, tensions []scale.Interval) Name {
 
 	return name{
 		root:  *root,
-		tension: tensionName,
-		value: root.String() + tensionName,
+		value: string(triad) + tensionName,
 	}
 }
 
 func NewNameWithTensionName(root *scale.Note, tension string) Name {
 	return name{
 		root:  *root,
-		tension: tension,
-		value: root.String() + tension,
+		value: tension,
 	}
 }

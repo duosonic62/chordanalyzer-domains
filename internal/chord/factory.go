@@ -30,7 +30,7 @@ func (f Factory) Build() ([]Chord, error) {
 	return tensions, nil
 }
 
-//BuildWithName is create tension chord with name
+//BuildWithName is create value chord with name
 //Use this function to generate chord whose name is difficult to guess. (e.g. Cm7b5 and Cdim7)
 //For triad chords, the name will be ignored.
 func (f Factory) BuildWithName(name string) ([]Chord, error) {
