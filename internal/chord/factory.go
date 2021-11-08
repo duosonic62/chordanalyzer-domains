@@ -30,7 +30,7 @@ func (f Factory) Build() ([]Chord, error) {
 	return tensions, nil
 }
 
-//BuildWithName is create tension chord with name
+//BuildWithName is create value chord with name
 //Use this function to generate chord whose name is difficult to guess. (e.g. Cm7b5 and Cdim7)
 //For triad chords, the name will be ignored.
 func (f Factory) BuildWithName(name string) ([]Chord, error) {
@@ -46,9 +46,9 @@ func (f Factory) BuildWithName(name string) ([]Chord, error) {
 }
 
 func (f Factory) createTensionChord() ([]Chord, error) {
-	allNotes := scale.AllNotes()
+	allNotes := scale.AllNotesInOctave()
 	tensions := make([]Chord, len(allNotes))
-	for i, root := range scale.AllNotes() {
+	for i, root := range scale.AllNotesInOctave() {
 		tension, err := NewTensionChord(&root, f.triad, f.tension)
 		if err != nil {
 			return nil, err
@@ -60,10 +60,10 @@ func (f Factory) createTensionChord() ([]Chord, error) {
 }
 
 func (f Factory) createTensionWithName(name string) ([]Chord, error) {
-	allNotes := scale.AllNotes()
+	allNotes := scale.AllNotesInOctave()
 	tensions := make([]Chord, len(allNotes))
-	for i, root := range scale.AllNotes() {
-		tension, err := NewTensionChordWithName(root.String() + name, &root, f.triad, f.tension)
+	for i, root := range scale.AllNotesInOctave() {
+		tension, err := NewTensionChordWithName(name, &root, f.triad, f.tension)
 		if err != nil {
 			return nil, err
 		}

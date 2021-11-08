@@ -6,14 +6,14 @@ import (
 )
 
 type Tension struct {
-	name             string
+	name             Name
 	triad            *Triad
 	tensionNotes     []scale.Note
 	tensionIntervals []scale.Interval
 }
 
 func (t Tension) Name() string {
-	return t.name
+	return t.name.Get()
 }
 
 func (t Tension) Root() *scale.Note {
@@ -66,7 +66,7 @@ func (t Tension) notesNum() int {
 
 func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
 	if len(tensions) < 1 {
-		return nil, errors.New("tension chord must contains over 4 notes")
+		return nil, errors.New("value chord must contains over 4 notes")
 	}
 
 	var tensionName string
@@ -85,7 +85,7 @@ func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Int
 	}
 
 	return &Tension{
-		name:         triad.name + tensionName,
+		name:         NewName(root, triadType, tensions),
 		triad:        triad,
 		tensionNotes: tensionNotes,
 		tensionIntervals: tensions,
@@ -94,7 +94,7 @@ func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Int
 
 func NewTensionChordWithName(name string, root *scale.Note, triadType TriadType, tensions []scale.Interval) (*Tension, error) {
 	if len(tensions) < 1 {
-		return nil, errors.New("tension chord must contains over 4 notes")
+		return nil, errors.New("value chord must contains over 4 notes")
 	}
 
 	tensionNotes, err := intervalsToNotes(root, tensions)
@@ -108,7 +108,7 @@ func NewTensionChordWithName(name string, root *scale.Note, triadType TriadType,
 	}
 
 	return &Tension{
-		name:         name,
+		name:         NewNameWithTensionName(root, name),
 		triad:        triad,
 		tensionNotes: tensionNotes,
 		tensionIntervals: tensions,

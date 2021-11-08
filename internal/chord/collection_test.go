@@ -23,8 +23,8 @@ func TestCollection_ForEach(t *testing.T) {
 		count++
 	})
 
-	if count/len(scale.AllNotes()) != len(AllTriadTypes)+1 {
-		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes)+1) + " actions but actual: " + strconv.Itoa(count/len(scale.AllNotes())))
+	if count/len(scale.AllNotesInOctave()) != len(AllTriadTypes)+1 {
+		t.Error("Expected: " + strconv.Itoa(len(AllTriadTypes)+1) + " actions but actual: " + strconv.Itoa(count/len(scale.AllNotesInOctave())))
 	}
 }
 
@@ -32,7 +32,7 @@ func TestCollection_Get(t *testing.T) {
 	actual := major7Collection.Get("CM7")
 	major7, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
 	if actual.Name() != major7.Name() {
-		t.Error("")
+		t.Error("Expected: " + major7.Name() + " , but actual: " + actual.Name())
 	}
 }
 

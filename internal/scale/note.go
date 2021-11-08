@@ -185,7 +185,17 @@ func noteFromInterval(interval int) (*Note, error) {
 	}
 }
 
-func AllNotes() []Note {
+//FromString is to get note from name.
+func FromString(noteName string) (*Note, error) {
+	for _, note := range AllNotes() {
+		if note.String() == noteName {
+			return &note, nil
+		}
+	}
+	return nil, errors.New("note doesn't contain " + noteName)
+}
+
+func AllNotesInOctave() []Note {
 	return [] Note{
 		Notes.C,
 		Notes.CS,
@@ -198,6 +208,28 @@ func AllNotes() []Note {
 		Notes.GS,
 		Notes.A,
 		Notes.AS,
+		Notes.B,
+	}
+}
+
+func AllNotes() []Note {
+	return [] Note{
+		Notes.C,
+		Notes.CS,
+		Notes.Db,
+		Notes.D,
+		Notes.DS,
+		Notes.Eb,
+		Notes.E,
+		Notes.F,
+		Notes.FS,
+		Notes.Gb,
+		Notes.G,
+		Notes.GS,
+		Notes.Ab,
+		Notes.A,
+		Notes.AS,
+		Notes.Bb,
 		Notes.B,
 	}
 }
