@@ -56,6 +56,10 @@
       "name": "7#5",
       "triad": "Augment",
       "tension": ["b7"]
+    },
+    {
+      "triad": "Major",
+      "tension": ["7", "13"]
     }
   ]
 }
