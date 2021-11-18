@@ -10,4 +10,5 @@ type Chord interface {
 	Notes() []scale.Note
 	Intervals() []scale.Interval
 	Contains(other Chord) bool
+	CompareByName(name string) bool
 }

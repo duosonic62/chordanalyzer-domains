@@ -39,6 +39,10 @@ func (t Triad) Contains(other Chord) bool {
 	return t.Name() == other.Name()
 }
 
+func (t Triad) CompareByName(name string) bool {
+	return t.name == name
+}
+
 //NewTriad トライアドを生成する
 func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
 	if len(intervals) != 3 {

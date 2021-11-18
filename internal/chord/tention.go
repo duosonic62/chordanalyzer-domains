@@ -50,6 +50,10 @@ func (t Tension) Contains(other Chord) bool {
 	return true
 }
 
+func (t Tension) CompareByName(name string) bool {
+	return t.name.Equals(name)
+}
+
 func (t Tension) contains(note *scale.Note) bool {
 	for _, tn := range t.Notes() {
 		if tn.Equivalent(note) {
