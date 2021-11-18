@@ -40,7 +40,7 @@ func (t Triad) Contains(other Chord) bool {
 }
 
 func (t Triad) CompareByName(name string) bool {
-	return t.CompareByName(name)
+	return t.name.Equals(name)
 }
 
 //NewTriad トライアドを生成する

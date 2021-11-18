@@ -8,26 +8,26 @@ import (
 func TestNewTriad(t *testing.T) {
 	// Major Chord
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
-	if actual.name != "C" {
-		t.Error("Expected: C, but actual: " + actual.name)
+	if actual.Name() != "C" {
+		t.Error("Expected: C, but actual: " + actual.Name())
 	}
 
 	// Minor
 	actual, _ = NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5})
-	if actual.name != "Cm" {
-		t.Error("Expected: Cm, but actual: " + actual.name)
+	if actual.Name() != "Cm" {
+		t.Error("Expected: Cm, but actual: " + actual.Name())
 	}
 
 	// Aug
 	actual, _ = NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Sharp5})
-	if actual.name != "Caug" {
-		t.Error("Expected: Caug, but actual: " + actual.name)
+	if actual.Name() != "Caug" {
+		t.Error("Expected: Caug, but actual: " + actual.Name())
 	}
 
 	// Dim
 	actual, _ = NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Flat5})
-	if actual.name != "Cdim" {
-		t.Error("Expected: Cdim, but actual: " + actual.name)
+	if actual.Name() != "Cdim" {
+		t.Error("Expected: Cdim, but actual: " + actual.Name())
 	}
 
 	// no 3 notes
@@ -46,44 +46,44 @@ func TestNewTriad(t *testing.T) {
 func TestNewTriadFrom(t *testing.T) {
 	// Major Chord
 	actual, _ := NewTriadFrom(&scale.Notes.C, Major)
-	if actual.name != "C" {
-		t.Error("Expected: C, but actual: " + actual.name)
+	if actual.Name() != "C" {
+		t.Error("Expected: C, but actual: " + actual.Name())
 	}
 
 	// Minor
 	actual, _ = NewTriadFrom(&scale.Notes.C, Minor)
-	if actual.name != "Cm" {
-		t.Error("Expected: Cm, but actual: " + actual.name)
+	if actual.Name() != "Cm" {
+		t.Error("Expected: Cm, but actual: " + actual.Name())
 	}
 
 	// Aug
 	actual, _ = NewTriadFrom(&scale.Notes.C, Augment)
-	if actual.name != "Caug" {
-		t.Error("Expected: Caug, but actual: " + actual.name)
+	if actual.Name() != "Caug" {
+		t.Error("Expected: Caug, but actual: " + actual.Name())
 	}
 
 	// Dim
 	actual, _ = NewTriadFrom(&scale.Notes.C, Diminish)
-	if actual.name != "Cdim" {
-		t.Error("Expected: Cdim, but actual: " + actual.name)
+	if actual.Name() != "Cdim" {
+		t.Error("Expected: Cdim, but actual: " + actual.Name())
 	}
 
 	// Major b5
 	actual, _ = NewTriadFrom(&scale.Notes.C, MajorB5)
-	if actual.name != "CMb5" {
-		t.Error("Expected: Cdim, but actual: " + actual.name)
+	if actual.Name() != "CMb5" {
+		t.Error("Expected: Cdim, but actual: " + actual.Name())
 	}
 
 	// sus2
 	actual, _ = NewTriadFrom(&scale.Notes.C, Sus2)
-	if actual.name != "Csus2" {
-		t.Error("Expected: Csus2, but actual: " + actual.name)
+	if actual.Name() != "Csus2" {
+		t.Error("Expected: Csus2, but actual: " + actual.Name())
 	}
 
 	// sus4
 	actual, _ = NewTriadFrom(&scale.Notes.C, Sus4)
-	if actual.name != "Csus4" {
-		t.Error("Expected: Csus4, but actual: " + actual.name)
+	if actual.Name() != "Csus4" {
+		t.Error("Expected: Csus4, but actual: " + actual.Name())
 	}
 
 	// no Triad
@@ -96,8 +96,8 @@ func TestNewTriadFrom(t *testing.T) {
 func TestTriad_Name(t *testing.T) {
 	// name == Name()
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
-	if actual.name != actual.Name() {
-		t.Error("Expected: " + actual.name + ", but actual: " + actual.Name())
+	if actual.Name() != actual.Name() {
+		t.Error("Expected: " + actual.Name() + ", but actual: " + actual.Name())
 	}
 }
 
@@ -113,7 +113,7 @@ func TestTriad_Notes(t *testing.T) {
 	// name == Name()
 	actual, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
 	if !actual.Notes()[0].Equals(&scale.Notes.C) && actual.Notes()[1].Equals(&scale.Notes.E) && actual.Notes()[2].Equals(&scale.Notes.G) {
-		t.Error("Expected: " + actual.name + ", but actual: " + actual.Name())
+		t.Error("Expected: " + actual.Name() + ", but actual: " + actual.Name())
 	}
 }
 
