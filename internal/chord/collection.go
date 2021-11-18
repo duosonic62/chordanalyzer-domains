@@ -90,7 +90,7 @@ type collection struct {
 
 func (c collection) Get(chordName string) Chord {
 	chords := c.Filter(func(chord Chord) bool {
-		return chord.Name() == chordName
+		return chord.CompareByName(chordName)
 	})
 
 	var target Chord
