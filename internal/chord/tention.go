@@ -83,7 +83,7 @@ func NewTensionChord(root *scale.Note, triadType TriadType, tensions []scale.Int
 		return nil, err
 	}
 
-	triad, err := NewTriadFrom(root, triadType)
+	triad, err := NewTriad(root, triadType)
 	if err != nil {
 		return nil, err
 	}
@@ -106,7 +106,7 @@ func NewTensionChordWithName(name string, root *scale.Note, triadType TriadType,
 		return nil, err
 	}
 
-	triad, err := NewTriadFrom(root, triadType)
+	triad, err := NewTriad(root, triadType)
 	if err != nil {
 		return nil, err
 	}

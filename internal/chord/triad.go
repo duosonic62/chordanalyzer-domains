@@ -43,59 +43,6 @@ func (t Triad) CompareByName(name string) bool {
 	return t.name.Equals(name)
 }
 
-//NewTriad トライアドを生成する
-func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
-	if len(intervals) != 3 {
-		return nil, errors.New("the number of notes in the triad must be 3")
-	}
-
-	third := intervals[1]
-	fifth := intervals[2]
-	notes := make([]scale.Note, 3)
-
-	for i, interval := range intervals {
-		note, err := root.GetIntervalNote(&interval)
-		if err != nil {
-			return nil, err
-		}
-		notes[i] = *note
-	}
-
-	// major triad
-	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Perfect5) {
-		return &Triad{
-			name:  NewName(root, Major, []scale.Interval{}),
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// minor triad
-	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Perfect5) {
-		return &Triad{
-			name:  NewName(root, Minor, []scale.Interval{}),
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// augmented triad
-	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Sharp5) {
-		return &Triad{
-			name:  NewName(root, Augment, []scale.Interval{}),
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// diminished triad
-	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Flat5) {
-		return &Triad{
-			name:  NewName(root, Diminish, []scale.Interval{}),
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-
-	return nil, errors.New("triads must be [major, minor, aug, dim]")
-}
 
 type TriadType string
 
@@ -119,7 +66,7 @@ var AllTriadTypes = []TriadType {
 	Sus4,
 }
 
-func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
+func NewTriad(root *scale.Note, enum TriadType) (*Triad, error) {
 	switch enum {
 	case Major:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
