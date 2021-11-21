@@ -60,7 +60,7 @@ func buildTriads() ([]InOctave, error) {
 func buildTriad(triadType TriadType) ([]Chord, error) {
 	triads := make([]Chord, len(scale.AllNotesInOctave()))
 	for i, root := range scale.AllNotesInOctave() {
-		triad, err := NewTriadFrom(&root, triadType)
+		triad, err := NewTriad(&root, triadType)
 		if err != nil {
 			return nil, err
 		}
@@ -90,7 +90,7 @@ type collection struct {
 
 func (c collection) Get(chordName string) Chord {
 	chords := c.Filter(func(chord Chord) bool {
-		return chord.Name() == chordName
+		return chord.CompareByName(chordName)
 	})
 
 	var target Chord

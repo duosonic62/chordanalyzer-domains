@@ -6,14 +6,14 @@ import (
 )
 
 type Triad struct {
-	name      string
+	name      Name
 	root      scale.Note
 	notes     []scale.Note
 	intervals []scale.Interval
 }
 
 func (t Triad) Name() string {
-	return t.name
+	return t.name.Get()
 }
 
 func (t Triad) Root() *scale.Note {
@@ -39,59 +39,10 @@ func (t Triad) Contains(other Chord) bool {
 	return t.Name() == other.Name()
 }
 
-//NewTriad トライアドを生成する
-func NewTriad(root *scale.Note, intervals []scale.Interval) (*Triad, error) {
-	if len(intervals) != 3 {
-		return nil, errors.New("the number of notes in the triad must be 3")
-	}
-
-	third := intervals[1]
-	fifth := intervals[2]
-	notes := make([]scale.Note, 3)
-
-	for i, interval := range intervals {
-		note, err := root.GetIntervalNote(&interval)
-		if err != nil {
-			return nil, err
-		}
-		notes[i] = *note
-	}
-
-	// major triad
-	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Perfect5) {
-		return &Triad{
-			name:  root.String(),
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// minor triad
-	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Perfect5) {
-		return &Triad{
-			name:  root.String() + "m",
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// augmented triad
-	if third.Equivalent(&scale.Intervals.Major3) && fifth.Equals(&scale.Intervals.Sharp5) {
-		return &Triad{
-			name:  root.String() + "aug",
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-	// diminished triad
-	if third.Equivalent(&scale.Intervals.Minor3) && fifth.Equals(&scale.Intervals.Flat5) {
-		return &Triad{
-			name:  root.String() + "dim",
-			root:  *root,
-			notes: notes,
-		}, nil
-	}
-
-	return nil, errors.New("triads must be [major, minor, aug, dim]")
+func (t Triad) CompareByName(name string) bool {
+	return t.name.Equals(name)
 }
+
 
 type TriadType string
 
@@ -115,7 +66,7 @@ var AllTriadTypes = []TriadType {
 	Sus4,
 }
 
-func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
+func NewTriad(root *scale.Note, enum TriadType) (*Triad, error) {
 	switch enum {
 	case Major:
 		third, err :=  root.GetIntervalNote(&scale.Intervals.Major3)
@@ -128,7 +79,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *third, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5},
@@ -145,7 +96,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *third, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5},
@@ -162,7 +113,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *third, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Sharp5},
@@ -179,7 +130,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *third, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Flat5},
@@ -196,7 +147,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *third, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Perfect5, scale.Intervals.Flat5},
@@ -213,7 +164,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *second, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect5},
@@ -230,7 +181,7 @@ func NewTriadFrom(root *scale.Note, enum TriadType) (*Triad, error) {
 		}
 
 		return &Triad{
-			name:      root.String() + string(enum),
+			name:      NewName(root, enum, []scale.Interval{}),
 			root:      *root,
 			notes:     []scale.Note{*root, *fourth, *fifth},
 			intervals: []scale.Interval{scale.Intervals.R, scale.Intervals.Major2, scale.Intervals.Perfect4},

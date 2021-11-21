@@ -74,8 +74,8 @@ func TestTension_Intervals(t *testing.T) {
 
 func TestTension_Contains(t *testing.T) {
 	c7, _ := NewTensionChord(&scale.Notes.C, Major, []scale.Interval{scale.Intervals.Major7})
-	c, _ := NewTriad(&scale.Notes.C, []scale.Interval{scale.Intervals.R, scale.Intervals.Major3, scale.Intervals.Perfect5})
-	em, _ := NewTriad(&scale.Notes.E, []scale.Interval{scale.Intervals.R, scale.Intervals.Minor3, scale.Intervals.Perfect5})
+	c, _ := NewTriad(&scale.Notes.C, Major)
+	em, _ := NewTriad(&scale.Notes.E, Minor)
 
 	if !c7.Contains(c) {
 		t.Error("Expected: CM7 contains C, but actual doesn't contain")
