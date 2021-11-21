@@ -59,8 +59,8 @@ func TestNewTriadFrom(t *testing.T) {
 func TestTriad_Name(t *testing.T) {
 	// name == Name()
 	actual, _ := NewTriad(&scale.Notes.C, Major)
-	if actual.Name() != actual.Name() {
-		t.Error("Expected: " + actual.Name() + ", but actual: " + actual.Name())
+	if actual.Name() != "C" {
+		t.Error("Expected: " + actual.Name() + ", but actual: C")
 	}
 }
 
