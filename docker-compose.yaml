@@ -1,0 +1,10 @@
+version: "3"
+services:
+  app:
+    container_name: "app"
+    volumes:
+      - ./:/usr/src/myapp
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
